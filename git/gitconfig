@@ -1,0 +1,18 @@
+[color]
+ui = true
+
+[user]
+name  = nyarla
+email = nyarla@thotep.net
+
+[alias]
+co = checkout
+ci = commit
+st = status
+
+[core]
+excludesfile  = ~/.gitignore
+fileMode      = false
+preloadindex  = true
+fscache       = true
+autoCRLF      = false
