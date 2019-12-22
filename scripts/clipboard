@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+platform() {
+  case "$(uname -s)" in
+    *_NT-*) echo msys2  ;;
+    Darwin) echo darwin ;;
+    Linux)
+      if [[ "$(uname -r)" =~ -Microsoft$ ]] ; then
+        echo wsl
+      else
+        if which xclip 2>&1 >/dev/null ; then
+          echo xorg
+        elif ! test -z "${TMUX:-}" ; then
+          echo tmux
+        else
+          echo linux
+        fi
+      fi
+      ;;
+  esac
+}
+
+clipboard_set_msys2() {
+  cat - > /dev/clipboard
+}
+
+clipboard_get_msys2() {
+  cat /dev/clipboard
+}
+
+clipboard_set_wsl() {
+  cat - | /mnt/c/Windows/System32/clip.exe
+}
+
+clipboard_get_wsl() {
+  /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -sta "add-type -as System.Windows.Forms; [windows.forms.clipboard]::GetText()" | tr -d \\r
+}
+
+clipboard_set_xclip() {
+  cat - | xclip -in -selection clipboard
+}
+
+clipboard_get_xclip() {
+  xclip -o -selection clipboard
+}
+
+clipboard_set_tmux() {
+  tmux load-buffer -
+}
+
+clipboard_get_tmux() {
+  tmux save-buffer -
+}
+
+clipboard_set() {
+  case "$(platform)" in
+    *tmux*)  cat - | clipboard_set_tmux   ;;
+    *msys2*) cat - | clipboard_set_msys2  ;;
+    *wsl*)   cat - | clipboard_set_wsl    ;;
+    *xorg*)  cat - | clipboard_set_xclip  ;;
+    *)     echo "This platform does not support yet."; exit 1 ;;
+  esac
+}
+
+clipboard_get() {
+  case "$(platform)" in
+    *tmux*)   clipboard_get_tmux  ;;
+    *msys2*)  clipboard_get_msys2 ;;
+    *wsl*)    clipboard_get_wsl   ;;
+    *xorg*)   clipboard_get_xclip ;;
+    *)      echo "This platform does not support yet."; exit 1 ;;
+  esac
+}
+
+case "${1:-}" in
+  set)  (( test "x${2:-}" != "x" && cat $2 ) || ( cat - )) | clipboard_set ;;
+  get)  clipboard_get         ;;
+  *)
+    cat <<EOF
+clipboard: A wrapper script for sets or gets clipboard.
+
+  $ clipbaord set <file>  # set from file
+  $ cat - | clipboard set # set from stdin
+  $ clipbaord get         # get from clipboard
+
+EOF
+
+    exit 1
+    ;;
+esac
+

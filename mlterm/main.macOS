@@ -1,0 +1,32 @@
+#Terminal
+use_login_shell = true
+termtype = xterm-256color
+
+# Encoding
+encoding = UTF-8
+col_size_of_width_a = 2
+use_ctl = false
+
+# Keyboard
+mod_meta_key  = alt
+mod_meta_mode = esc
+
+# Font
+fontsize = 14
+
+# Appearance
+use_mdi = false
+scrollbar_mode = false
+
+line_space=3
+
+fg_color = hl_white
+bg_color = #242424
+blink_cursor = false
+vt_color_mode = true
+cursor_bg_color = hl_black
+cursor_fg_color = hl_white
+
+# Others
+tabsize = 2
+logsize = 4096
