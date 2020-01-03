@@ -1,0 +1,15 @@
+{
+    "name": "theme-smyck",
+    "version": "0.0.1",
+    "description": "Smyck Color Scheme for Oni",
+    "engines": {
+        "oni": "0.3.6"
+    },
+    "contributes": {
+        "themes": [
+            { "name": "smyck", "path": "colors/smyck.json"}
+        ]
+    },
+    "author": "",
+    "license": "MIT"
+}

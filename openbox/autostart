@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+# Display Kayout
+# --------------
+~/.screenlayout/NyXPS15.sh # by arandr
+
+# Input Method
+# ------------
+ibus-daemon -drx --config=$(readlink /run/current-system/sw/bin/ibus-daemon | sed 's|bin/ibus-daemon|libexec/ibus-dconf|')
+
+# Information Bar
+# ---------------
+/etc/nixos/dotfiles/nyarla/polybar/launch.sh &
+
+nm-applet &
