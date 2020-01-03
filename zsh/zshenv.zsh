@@ -34,7 +34,7 @@ export GOPATH="$HOME"/dev
 
 # Volt (vim plugin manager)
 # -------------------------
-! test -e"$HOME"/.config/vim-volt  || export VOLTPATH="$HOME"/.config/vim-volt
+! test -e"$HOME"/.config/volt  || export VOLTPATH="$HOME"/.config/volt
 
 # Scripts (on local machine)
 # --------------------------
