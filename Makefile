@@ -44,11 +44,9 @@ lsp:
 	test -d ~/.config/npm || mkdir -p ~/.config/npm
 	npm config set prefix "$$HOME"/.config/npm
 	npm install -g \
-      bash-language-server        \
-      dockerfile-language-service  \
-      typescript-eslint-language-service  \
-      vscode-css-languageservice   \
-      vscode-json-languageservice
+      bash-language-server \
+      dockerfile-language-service
+
 
 cpanm:
 	test -d ~/.config/perl5 || mkdir -p ~/.config/perl5
