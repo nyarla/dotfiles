@@ -32,7 +32,7 @@ blink_cursor = true
 # ======
 
 use_xim = true
-input_method = ibus:skk
+input_method = uim
 
 tab_size = 2
 log_size = 4096
