@@ -1,0 +1,16 @@
+---
+version: "2"
+services:
+  cops:
+    image: linuxserver/cops
+    container_name: cops
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Asai/Tokyo
+    volumes:
+      - /home/nyarla/local/docker/cops:/config
+      - /run/media/nyarla/LINUX/Files/live/ebooks:/books
+    ports:
+      - 0.0.0.0:10080:80
+    restart: unless-stopped
