@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd ~/local/wine/Adobe
+bin/run wine explorer
+bin/run wineserver -k

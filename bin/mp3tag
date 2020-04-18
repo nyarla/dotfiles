@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+cd ~/local/wine/mp3tags
+
+bin/run wine 'C:\Program Files (x86)\Mp3tag\Mp3tag.exe'

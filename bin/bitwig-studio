@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+eval "$(cat "$(which carla)" | grep export)"
+
+bitwig-studio "$@"
