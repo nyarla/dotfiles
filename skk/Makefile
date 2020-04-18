@@ -11,7 +11,6 @@ SKK-JISYO.XL: 						\
 	SKK-JISYO.law 					\
 	SKK-JISYO.okinawa 			\
 	SKK-JISYO.propernoun 		\
-	SKK-JISYO.pubdic+ 			\
 	SKK-JISYO.station	
 	echo ';; -*- mode: fundamental; coding: euc-jp -*-' >SKK-JISYO.XL
 	skkdic-expr2 $(shell sh -c 'ls SKK-JISYO.* | tr "\n" " " | sed "s! ! + !g" | sed "s!\+ \$$!!"') >>SKK-JISYO.XL
