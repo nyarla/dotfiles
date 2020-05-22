@@ -41,12 +41,9 @@ deadbeef
 # Office
 mate-calc
 gucharmap
-gimp
-inkscape
 peek
 com.github.philip-scott.spice-up
 keepassxc
-qtpass
 simple-scan
 
 # VM
@@ -67,6 +64,7 @@ kindle
 FLStudio
 adobe
 mp3tag
+DTM
 EOF
 }
 
