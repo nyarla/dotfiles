@@ -2,4 +2,7 @@
 
 eval "$(cat "$(which carla)" | grep export)"
 
+export YABRIDGE_DEBUG_FILE=$HOME/.cache/yabridge.log
+export YABRIDGE_DEBUG_LEVEL=1
+
 bitwig-studio "$@"
