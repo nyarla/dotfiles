@@ -1,4 +1,4 @@
-.PHONY: all git dunst mlterm tmux zsh vim lsp cpanm screenshot
+.PHONY: all git dunst jwm mlterm tmux zsh vim lsp cpanm screenshot
 
 all: git dunst mlterm tmux zsh vim
 
@@ -11,6 +11,9 @@ git:
 dunst:
 	test -e ~/.config/dunst || mkdir -p ~/.config/dunst
 	ln -sf $(shell pwd)/dunst/dunstrc ~/.config/dunst/dunstrc
+
+jwm:
+	ln -sf $(shell pwd)/jwm/jwmrc.xml ~/.jwmrc
 
 mlterm:
 	test -e ~/.mlterm || mkdir -p ~/.mlterm

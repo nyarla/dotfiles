@@ -18,6 +18,7 @@ applications() {
   cat <<EOF
 # Browser
 firefox
+thunderbird
 transmission-gtk
 
 # Files
@@ -57,14 +58,13 @@ dconf-editor
 magnify
 mullvad-gui
 connman-gtk
-Xephyr
+Xnest
 
 # Scripts
 kindle
 FLStudio
-adobe
 mp3tag
-DTM
+DAW
 EOF
 }
 

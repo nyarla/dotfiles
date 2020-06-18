@@ -11,11 +11,9 @@
         <command>qjackctl</command>
       </action>
     </item>
-    <separator />
-    <item label="Launch All">
+    <item label="Carla">
       <action name="Execute">
-        <command>qjackctl</command>
-        <command>bash ~/local/dotfiles/bin/bitwig-studio</command>
+        <command>carla</command>
       </action>
     </item>
   </menu>
