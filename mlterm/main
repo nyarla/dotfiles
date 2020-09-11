@@ -19,7 +19,7 @@ box_drawing_font = decsp
 scrollbar_mode = false
 
 fg_color = hl_white
-bg_color = #191919
+bg_color = #242424
 vt_color_mode = true
 cursor_bg_color = hl_green
 cursor_fg_color = hl_black
