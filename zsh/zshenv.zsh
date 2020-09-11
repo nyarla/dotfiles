@@ -10,9 +10,9 @@ function has() {
 
 # Perl
 # ----
-if has perl && test -d "$HOME"/.config/perl5 ; then
-  eval "$(perl -I"$HOME"/.config/perl5/lib/perl5 -Mlocal::lib="$HOME"/.config/perl5)"
-  export PERL_CPANM_OPT="--local-lib-contained ${HOME}/.config/perl5"
+if has perl && test -d "$HOME"/.config/perl ; then
+  eval "$(perl -I"$HOME"/.config/perl/lib/perl5 -Mlocal::lib="$HOME"/.config/perl)"
+  export PERL_CPANM_OPT="--local-lib-contained ${HOME}/.config/perl"
 fi
 
 # Go
@@ -32,18 +32,14 @@ export GOPATH="$HOME"/dev
 # --------------
 ! test -e /etc/openjdk              || export JDK_HOME=/etc/openjdk
 
-# Volt (vim plugin manager)
-# -------------------------
-! test -e"$HOME"/.config/volt  || export VOLTPATH="$HOME"/.config/volt
-
 # Scripts (on local machine)
 # --------------------------
-! test -d "$HOME"/local/bin       || export PATH="$HOME"/local/bin:$PATH
+! test -d "$HOME"/local/bin         || export PATH="$HOME"/local/bin:$PATH
 
 # EDTIOR (vim)
 # ------------
-if has vim ; then
-  export EDITOR=vim
+if has nvim ; then
+  export EDITOR=nvim
 fi
 
 # cleanup (PATH)
