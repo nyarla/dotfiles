@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+export LIBGL_ALWAYS_INDIRECT=1
+
+if ! pgrep uim-xim  2>&1 >/dev/null; then
+  uim-xim &
+fi
+
+if ! test -e ~/dev/src/github.com/nyarla/.mounted ; then
+  sudo mount --bind /media/resilio/dev ~/dev/src/github.com/nyarla
+fi
+
+cd ~/
+dbus-launch mlterm -e $(which zsh) --login &
