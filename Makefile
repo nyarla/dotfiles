@@ -41,7 +41,7 @@ cpm:
 
 clipboard:
 	test -d ~/local/bin || mkdir -p ~/local/bin
-	test -e ~/local/bin/clipboard	|| ln -sf $(shell pwd)/scripts/clipboard ~/local/bin/clipboard
+	test -e ~/local/bin/clipboard	|| ln -sf $(shell pwd)/bin/clipboard ~/local/bin/clipboard
 
 pt:
 	test -d ~/dev || mkdir -p ~/dev
@@ -73,6 +73,6 @@ mlterm:
 				rm ~/.mlterm/main 	; ln -sf $(shell pwd)/mlterm/main  	~/.mlterm/main )
 
 screenshot:
-	chmod +x $(shell pwd)/scripts/screenshot.sh
+	chmod +x $(shell pwd)/bin/screenshot.sh
 	test -d ~/local/bin || mkdir -p ~/local/bin
-	test -e ~/local/bin || ln -sf $(shell pwd)/scripts/clipboard ~/local/bin/screenshot
+	test -e ~/local/bin || ln -sf $(shell pwd)/bin/screenshot.sh ~/local/bin/screenshot.sh
