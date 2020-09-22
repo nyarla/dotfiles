@@ -12,4 +12,9 @@ if ! test -e ~/dev/src/github.com/nyarla/.mounted ; then
 fi
 
 cd ~/
-dbus-launch mlterm -e $(which zsh) --login &
+
+if type wcwidth-cjk ; then
+  dbus-launch mlterm -e wcwidth-cjk $(which zsh) --login &
+else
+  dbus-launch mlterm -e $(which zsh) --login &
+fi
