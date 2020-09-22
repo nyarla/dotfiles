@@ -72,8 +72,8 @@ main() {
   local APPS="$(applications | grep -v "^#" | grep -v "^$" | sort | uniq)"
   local SEL="$(echo $APPS | tr ' ' "\n" | filter)"
 
-  if test -x ~/local/dotfiles/bin/$SEL ; then
-    exec ~/local/dotfiles/bin/$SEL
+  if test -x ~/local/dotfiles/launch/$SEL ; then
+    exec ~/local/dotfiles/launch/$SEL
   fi
 
   if test -x /run/current-system/sw/bin/$SEL ; then
