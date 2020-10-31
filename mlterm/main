@@ -9,9 +9,9 @@ col_size_of_width_a = 2
 # Font
 # ====
 
-fontsize = 30
+fontsize = 15
 use_anti_alias = true
-box_drawing_font = decsp
+box_drawing_font = unicode
 
 # Appearance
 # ==========
@@ -24,7 +24,7 @@ vt_color_mode = true
 cursor_bg_color = hl_green
 cursor_fg_color = hl_black
 
-line_space = 6
+line_space = 3
 
 blink_cursor = true
 
