@@ -8,7 +8,7 @@ platform() {
       if [[ "$(uname -r)" =~ -Microsoft$ ]] ; then
         echo wsl
       else
-        if which xclip 2>&1 >/dev/null ; then
+        if which xclip >/dev/null 2>&1; then
           echo xorg
         elif ! test -z "${TMUX:-}" ; then
           echo tmux

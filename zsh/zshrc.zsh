@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function has() {
-  type ${1:-} 2>&1 >/dev/null
+  type ${1:-} >/dev/null 2>&1
 }
 
 # zshrc (for login or interactive)
