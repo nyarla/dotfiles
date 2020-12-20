@@ -2,7 +2,7 @@ all: clean SKK-JISYO.XL.utf8
 
 SKK-JISYO.XL.utf8: SKK-JISYO.XL
 	iconv -c -f EUC-JISX0213 -t utf8 < SKK-JISYO.XL >SKK-JISYO.XL.utf8
-	sed -i 's|coding: euc-ji|coding: utf8|' SKK-JISYO.XL.utf8
+	sed -i 's|coding: euc-jp|coding: utf8|' SKK-JISYO.XL.utf8
 	
 
 SKK-JISYO.XL: 						\
@@ -38,3 +38,7 @@ clean:
 install: SKK-JISYO.XL
 	test -d $(HOME)/.config/skk || mkdir -p $(HOME)/.config/skk
 	cp SKK-JISYO.XL $(HOME)/.config/skk/
+
+windows: SKK-JISYO.XL.utf8
+	test -d /mnt/c/Users/nyarla/Documents/SKK || mkdir -p /mnt/c/Users/nyarla/Documents/SKK
+	cp SKK-JISYO.XL.utf8 /mnt/c/Users/nyarla/Documents/SKK/
