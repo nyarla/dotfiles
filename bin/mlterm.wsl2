@@ -7,8 +7,8 @@ if ! pgrep uim-xim >/dev/null 2>&1; then
   uim-xim &
 fi
 
-if ! test -e ~/dev/src/github.com/nyarla/.mounted ; then
-  sudo mount --bind /media/resilio/dev ~/dev/src/github.com/nyarla
+if test "x$(ps aux | grep inotify-rsync | grep -v grep)" = "x" ; then
+  ~/local/dotfiles/services/wsl2/inotify-rsync.sh &
 fi
 
 cd ~/
