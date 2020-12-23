@@ -7,13 +7,14 @@ wsl2: console toolchain mlterm
 console: git tmux zsh nvim
 
 git:
-	test -e ~/.gitconfig || ln -sf $(shell pwd)/git/gitconfig
-	test -e ~/.gitignore || ln -sf $(shell pwd)/git/gitignore
+	test -e ~/.gitconfig || ln -sf $(shell pwd)/git/gitconfig ~/.gitconfig
+	test -e ~/.gitignore || ln -sf $(shell pwd)/git/gitignore ~/.gitignore
 
 tmux:
-	test -e ~/.tmux.conf || ln -sf $(shell pwd)/.tmux.conf
+	test -e ~/.tmux.conf || ln -sf $(shell pwd)/tmux/tmux.conf ~/.tmux.conf
 
 zsh:
+	test -d ~/.config/zsh || mkdir -p ~/.config/zsh
 	test -d ~/.config/zsh/enhancd				|| (cd ~/.config/zsh; git clone https://github.com/b4b4r07/enhancd)
 	test -d ~/.config/zsh/powerlevel10k	|| (cd ~/.config/zsh; git clone https://github.com/romkatv/powerlevel10k)
 	test -d ~/.zshrc 		|| ln -sf $(shell pwd)/zsh/zshrc.zsh 			~/.zshrc
