@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 function has() {
   type ${1:-} >/dev/null 2>&1
 }
@@ -111,15 +115,9 @@ esac
 # ------------------
 
 ! test -e "$HOME"/.config/zsh/enhancd/init.sh || source "$HOME"/.config/zsh/enhancd/init.sh
-
-if test -e "$HOME"/.config/zsh/zfunctions ; then
-  fpath=("$HOME"/.config/zsh/zfunctions $fpath)
-  autoload -U promptinit; promptinit
-  export PURE_PROMPT_SYMBOL="$"
-  export PURE_PROMPT_VICMD_SYMBOL="%"
-  prompt pure
-fi
+! test -e "$HOME"/.config/zsh/powerlevel10k   || source "$HOME"/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme 
 
 # finalize
 # --------
 unset -f has
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

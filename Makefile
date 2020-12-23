@@ -14,16 +14,12 @@ tmux:
 	test -e ~/.tmux.conf || ln -sf $(shell pwd)/.tmux.conf
 
 zsh:
-	test -d ~/.config/zsh/zfunctions || mkdir -p ~/.config/zsh/zfunctions
-	test -d ~/.config/zsh/enhancd    || (cd ~/.config/zsh; git clone https://github.com/b4b4r07/enhancd)
-	test -d ~/.config/zsh/pure 		   || (cd ~/.config/zsh; git clone https://github.com/sindresorhus/pure)
-	test -e ~/.config/zsh/zfunctions/async.zsh \
-		|| ln -sf ~/.config/zsh/pure/async.zsh 	~/.config/zsh/zfunctions/async
-	test -e ~/.confit/zsh/zfunctions/prompt_pure_setup \
-		|| ln -sf ~/.config/zsh/pure/pure.zsh 	~/.config/zsh/zfunctions/prompt_pure_setup
+	test -d ~/.config/zsh/enhancd				|| (cd ~/.config/zsh; git clone https://github.com/b4b4r07/enhancd)
+	test -d ~/.config/zsh/powerlevel10k	|| (cd ~/.config/zsh; git clone https://github.com/romkatv/powerlevel10k)
 	test -d ~/.zshrc 		|| ln -sf $(shell pwd)/zsh/zshrc.zsh 			~/.zshrc
 	test -d ~/.zprofile || ln -sf $(shell pwd)/zsh/zprofile.zsh 	~/.zprofile
 	test -d ~/.zshenv 	|| ln -sf $(shell pwd)/zsh/zshenv.zsh 		~/.zshenv
+	test -d ~/.p10k.zsh || ln -sf $(shell pwd)/zsh/p10k.zsh 			~/.p10k.zsh
 
 nvim:
 	test -d ~/.cache/nvim 	|| mkdir -p ~/.cache/nvim/{swap,backup}
