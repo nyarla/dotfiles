@@ -13,9 +13,13 @@ function has() {
 # --------------------
 
 if has wcwidth-cjk && has wcwidth; then
-  if test "$(wcwidth '○' | cut -d' ' -f1)" = "1" ; then
-    exec wcwidth-cjk $SHELL --login
-  fi
+  case "$(uname -s)" in
+    *Linux*)
+      if has wcwidth-cjk && ! [[ "${LD_PRELOAD}" =~ .*wcwidth-cjk.so* ]]; then
+        exec wcwidth-cjk $SHELL --login
+      fi
+      ;;
+  esac
 fi
 
 # keychain (for ssh and mosh)
