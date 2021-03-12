@@ -7,8 +7,8 @@ if ! pgrep uim-xim >/dev/null 2>&1; then
   uim-xim &
 fi
 
-if test "x$(ps aux | grep inotify-rsync | grep -v grep)" = "x" ; then
-  ~/local/dotfiles/services/wsl2/inotify-rsync.sh &
+if test "x$(ps aux | grep syncthing | grep -v grep)" = "x" ; then
+  syncthing >/dev/null 2>&1 &
 fi
 
 cd ~/
