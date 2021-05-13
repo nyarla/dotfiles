@@ -21,7 +21,7 @@ _tmux:
 
 zsh:
 	test -d ~/.config/zsh || mkdir -p ~/.config/zsh
-	test -d ~/.config/zsh/enhancd				|| (cd ~/.config/zsh; git clone https://github.com/b4b4r07/enhancd)
+	test -d ~/.config/zsh/z				|| (cd ~/.config/zsh; git clone https://github.com/rupa/z)
 	test -d ~/.config/zsh/powerlevel10k	|| (cd ~/.config/zsh; git clone https://github.com/romkatv/powerlevel10k)
 	test -d ~/.zshrc 		|| ln -sf $(shell pwd)/zsh/zshrc.zsh 			~/.zshrc
 	test -d ~/.zprofile || ln -sf $(shell pwd)/zsh/zprofile.zsh 	~/.zprofile

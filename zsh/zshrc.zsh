@@ -4,6 +4,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# init (zsh plugins)
+# ------------------
+
+! test -e "$HOME"/.config/zsh/z || source "$HOME"/.config/zsh/z/z.sh
+
 function has() {
   type ${1:-} >/dev/null 2>&1
 }
@@ -81,6 +86,22 @@ if has fzy ; then
 
   zle -N fzy-history
   bindkey '^R' fzy-history
+
+  if test -e $HOME/.config/zsh/z ; then
+    function __cd() {
+      local dir="${1:-}"
+
+      if test "x${dir}" = "x"; then
+        local dir="$(z -l | sed 's/ \+/ /g' | cut -d\  -f2 | sort -u | fzy | sed "s:~:$HOME:")"
+        \cd "$dir"
+        z --add "$dir"
+      else
+        \cd "$dir"
+      fi
+    }
+
+    alias cd="__cd"
+  fi
 fi
 
 if has wcwidth-cjk && has mosh ; then
@@ -94,6 +115,11 @@ case "$(uname -s | tr '[:upper:]' '[:lower:]')" in
   linux)
     alias ls="ls --color -F"
     alias rm="trash"
+    alias resume-nvim="pkill -SIGCONT nvim"
+
+    if test "x${NVIM_LISTEN_ADDRESS}" != "x" ; then
+      alias nvim="nvr"
+    fi
     ;;
   darwin)
     alias ls="ls -GF"
@@ -110,14 +136,10 @@ case "$(uname -s | tr '[:upper:]' '[:lower:]')" in
     # trap 'sh -c "cmd /C \"taskkill /F /T /PID $(cat /proc/$$/winpid)\""' 1 2 3 15
     ;;
 esac
-
-# init (zsh plugins)
-# ------------------
-
-! test -e "$HOME"/.config/zsh/enhancd/init.sh || source "$HOME"/.config/zsh/enhancd/init.sh
-! test -e "$HOME"/.config/zsh/powerlevel10k   || source "$HOME"/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme 
+# ! test -e "$HOME"/.config/zsh/enhancd/init.sh || source "$HOME"/.config/zsh/enhancd/init.sh
+! test -e "$HOME"/.config/zsh/powerlevel10k   || source "$HOME"/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
+! test -f "$HOME/.p10k.zsh" || source ~/.p10k.zsh
 
 # finalize
 # --------
 unset -f has
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
