@@ -1,0 +1,31 @@
+format = """
+$directory$git_branch$git_status $cmd_duration\n\
+$character"""
+
+add_newline = true
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style)"
+style = "blue"
+read_only = "  "
+read_only_style = "yellow"
+truncation_symbol = ".../"
+truncate_to_repo = false
+
+[character]
+format = "$symbol "
+success_symbol = "[\\$](purple)"
+error_symbol = "[\\$](red)"
+vicmd_symbol = "[!](green)"
+
+[cmd_duration]
+format = "[$duration]($style)"
+style = "yellow"
+
+[git_branch]
+format = "[ $symbol$branch]($style)"
+symbol = ""
+style = "white"
+
+[git_status]
+format = "[ $ahead_behind](cyan)"

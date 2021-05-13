@@ -1,17 +1,17 @@
 #!/usr/bin/env zsh
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # init (zsh plugins)
 # ------------------
-
-! test -e "$HOME"/.config/zsh/z || source "$HOME"/.config/zsh/z/z.sh
 
 function has() {
   type ${1:-} >/dev/null 2>&1
 }
+
+! test -e "$HOME"/.config/zsh/z || source "$HOME"/.config/zsh/z/z.sh
+if has starship ; then
+  eval "$(starship init zsh)"
+  export RPS1=""
+fi
 
 # zshrc (for login or interactive)
 # ================================
@@ -97,6 +97,7 @@ if has fzy ; then
         z --add "$dir"
       else
         \cd "$dir"
+        z --add "$dir"
       fi
     }
 
@@ -136,10 +137,6 @@ case "$(uname -s | tr '[:upper:]' '[:lower:]')" in
     # trap 'sh -c "cmd /C \"taskkill /F /T /PID $(cat /proc/$$/winpid)\""' 1 2 3 15
     ;;
 esac
-# ! test -e "$HOME"/.config/zsh/enhancd/init.sh || source "$HOME"/.config/zsh/enhancd/init.sh
-! test -e "$HOME"/.config/zsh/powerlevel10k   || source "$HOME"/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
-! test -f "$HOME/.p10k.zsh" || source ~/.p10k.zsh
-
 # finalize
 # --------
 unset -f has
