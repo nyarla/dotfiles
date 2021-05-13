@@ -1,16 +1,22 @@
-all: console toolchain gui
+.PHONY: all console development \
+	git zsh \
+	npm cpm clipboard pt \
+	mlterm _dunst _jwm _screenshot
 
-wsl2: console toolchain mlterm
+all:
+	@echo "usage: make <bundle|app>"
 
+console: git zsh
 
-.PHONY: git tmux zsh nvim
-console: git tmux zsh nvim
+development: npm cpm clipboard pt
+
+_gui: dunst jwm screenshot
 
 git:
 	test -e ~/.gitconfig || ln -sf $(shell pwd)/git/gitconfig ~/.gitconfig
 	test -e ~/.gitignore || ln -sf $(shell pwd)/git/gitignore ~/.gitignore
 
-tmux:
+_tmux:
 	test -e ~/.tmux.conf || ln -sf $(shell pwd)/tmux/tmux.conf ~/.tmux.conf
 
 zsh:
@@ -22,15 +28,8 @@ zsh:
 	test -d ~/.zshenv 	|| ln -sf $(shell pwd)/zsh/zshenv.zsh 		~/.zshenv
 	test -d ~/.p10k.zsh || ln -sf $(shell pwd)/zsh/p10k.zsh 			~/.p10k.zsh
 
-nvim:
-	test -d ~/.cache/nvim 	|| mkdir -p ~/.cache/nvim/{swap,backup}
-	test -d ~/.config/nvim 	|| (cd ~/.config; git clone https://github.com/nyarla/dotnvim nvim)
-
-.PHONY: npm cpm clipboard pt
-toolchain: npm cpm clipboard pt
-
 npm:
-	npm config -g set prefix ~/.config/npm
+	npm config set prefix ~/.config/npm
 
 cpm:
 	test -d ~/.config/perl || mkdir -p ~/.config/perl
@@ -41,35 +40,32 @@ clipboard:
 	test -e ~/local/bin/clipboard	|| ln -sf $(shell pwd)/bin/clipboard ~/local/bin/clipboard
 
 pt:
-	test -d ~/dev || mkdir -p ~/dev
-	which pt \
-		|| (env GOPATH=$$HOME/dev go get -u github.com/monochromegane/the_platinum_searcher; \
-				cd ~/dev/src/github.com/monochromegane/the_platinum_searcher/cmd/pt; \
-				env GOPATH=$$HOME/dev go build .; \
-				cp pt ~/local/bin/pt )
-
-.PHONY: dunst jwm mlterm screenshot
-gui: dunst jwm mlterm screenshot
-
-dunst:
-	test -d ~/.config/dunst || mkdir -p ~/.config/dunst
-	test -e ~/.config/dunst/dunstrc || ln -sf $(shell pwd)/dunst/dunstrc ~/.config/dunst/dunstrc
-
-jwm:
-	test -e ~/.jwmrc || ln -sf $(shell pwd)/jwm/jwmrc ~/.jwmrc
+	test -d ~/local/bin || mkdir -p ~/local/bin
+	cd /tmp && \
+		( curl -L https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.2.0/pt_linux_amd64.tar.gz \
+			| tar -zxvf - pt_linux_amd64/pt ; \
+				mv pt_linux_amd64/pt ~/local/bin/pt ; \
+				rm -r /tmp/pt_linux_amd64 )
 
 mlterm:
 	test -d ~/.mlterm || mkdir -p ~/.mlterm
-	test -e ~/.mlterm/aafont 	|| ln -sf $(shell pwd)/mlterm/aafont ~/.mlterm/aafont
 	test -e ~/.mlterm/color 	|| ln -sf $(shell pwd)/mlterm/color 	~/.mlterm/color
 	test -e ~/.mlterm/key 		|| ln -sf $(shell pwd)/mlterm/key 		~/.mlterm/key
-	test -e ~/.mlterm 				|| ln -sf $(shell pwd)/mlterm/main  	~/.mlterm/main
-	test "$(shell uname -s)" != "Darwin" \
-		|| \
-			( rm ~/.mlterm/aafont	; ln -sf $(shell pwd)/mlterm/aafont.macOS ~/.mlterm/aafont; \
-				rm ~/.mlterm/main 	; ln -sf $(shell pwd)/mlterm/main  	~/.mlterm/main )
+	( test "$(shell uname -s)" = "Linux" && ln -sf $(shell pwd)/mlterm/main.linux ~/.mlterm/main) || true 
+	( test "$(shell uname -s)" = "Darwin" && ln -sf $(shell pwd)/mlterm/main.macOS ~/.mlterm/main) || true
+	( [[ "$(shell uname -s)" =~ .*NT.* ]]  && ln -sf $(shell pwd)/mlterm/main.win32 ~/.mlterm/main) || true
+	( test "$(shell uname -s)" = "Linux" && ln -sf $(shell pwd)/mlterm/font.linux ~/.mlterm/aafont) || true 
+	( test "$(shell uname -s)" = "Darwin" && ln -sf $(shell pwd)/mlterm/font.macOS ~/.mlterm/aafont) || true
+	( [[ "$(shell uname -s)" =~ .*NT.* ]]  && ln -sf $(shell pwd)/mlterm/font.win32 ~/.mlterm/font) || true
 
-screenshot:
+_dunst:
+	test -d ~/.config/dunst || mkdir -p ~/.config/dunst
+	test -e ~/.config/dunst/dunstrc || ln -sf $(shell pwd)/dunst/dunstrc ~/.config/dunst/dunstrc
+
+_jwm:
+	test -e ~/.jwmrc || ln -sf $(shell pwd)/jwm/jwmrc ~/.jwmrc
+
+_screenshot:
 	chmod +x $(shell pwd)/bin/screenshot.sh
 	test -d ~/local/bin || mkdir -p ~/local/bin
 	test -e ~/local/bin || ln -sf $(shell pwd)/bin/screenshot.sh ~/local/bin/screenshot.sh
