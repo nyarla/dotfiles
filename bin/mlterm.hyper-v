@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+source /etc/profile.d/gsettings
+
+export DISPLAY="169.254.229.130:0.0"
+export LIBGL_ALWAYS_INDIRECT=1
+
+if test "x$(ps aux | grep syncthing | grep -v grep)" = "x" ; then
+  syncthing >/dev/null 2>&1 &
+fi
+
+ibus-daemon -drx &
+
+cd ~/
+
+if type wcwidth-cjk >/dev/null 2>&1 ; then
+  dbus-launch mlterm -e wcwidth-cjk $(which zsh) --login &
+else
+  dbus-launch mlterm -e $(which zsh) --login &
+fi
