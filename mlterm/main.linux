@@ -12,6 +12,7 @@ col_size_of_width_a = 2
 fontsize = 15
 use_anti_alias = true
 box_drawing_font = unicode
+type_engine = xft
 
 # Appearance
 # ==========
