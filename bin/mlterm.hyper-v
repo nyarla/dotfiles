@@ -2,7 +2,7 @@
 
 source /etc/profile.d/gsettings
 
-export DISPLAY="169.254.229.130:0.0"
+export DISPLAY="192.168.254.1:0.0"
 export LIBGL_ALWAYS_INDIRECT=1
 
 if test "x$(ps aux | grep syncthing | grep -v grep)" = "x" ; then
