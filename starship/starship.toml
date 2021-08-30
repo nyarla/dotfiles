@@ -7,7 +7,7 @@ add_newline = true
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style)"
 style = "blue"
-read_only = "  "
+read_only = ""
 read_only_style = "yellow"
 truncation_symbol = ".../"
 truncate_to_repo = false
@@ -23,9 +23,9 @@ format = "[$duration]($style)"
 style = "yellow"
 
 [git_branch]
-format = "[ $symbol$branch]($style)"
+format = " [$symbol$branch]($style)"
 symbol = ""
 style = "white"
 
 [git_status]
-format = "[ $ahead_behind](cyan)"
+format = " [$ahead_behind](cyan)"
