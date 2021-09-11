@@ -63,6 +63,12 @@
         <command>picard</command>
       </action>
     </item>
+    <separator/>
+    <item label="Kindle">
+      <action name="Execute">
+        <command>/home/nyarla/local/bin/kindle</command>
+      </action>
+    </item>
   </menu>
 
   <menu id="application-office" label="Office">

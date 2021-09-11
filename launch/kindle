@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 
 cd ~/local/wine/Kindle
-
-bin/run wine 'C:\Program Files\Amazon\Kindle\Kindle.exe'
+env WINEPREFIX=$(pwd) wine 'C:\Program Files (x86)\Amazon\Kindle\Kindle.exe'
