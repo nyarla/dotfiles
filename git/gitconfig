@@ -24,4 +24,4 @@ autoCRLF      = false
 	required = true
 	clean = git-lfs clean -- %f
 [init]
-	defaultBranch = develop
+	defaultBranch = main
