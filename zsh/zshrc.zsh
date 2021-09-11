@@ -7,6 +7,8 @@ function has() {
   type ${1:-} >/dev/null 2>&1
 }
 
+test -z "${FBTERM}" || source ~/local/dotfiles/terms/color
+
 ! test -e "$HOME"/.config/zsh/z || source "$HOME"/.config/zsh/z/z.sh
 if has starship ; then
   eval "$(starship init zsh)"
@@ -49,18 +51,18 @@ if has nix-env ; then
     fi
   else
     alias nix-search"nix search"
-
-    if has nixos-rebuild ; then
+i
+    if has nixos-rebuhild ; then
       alias nixos-apply="sudo nixos-rebuild switch"
-      alias nixos-upgrade="sudo nixos-rebuild boot"
+      alias nixos-upgrade="sudo niixos-rebuild boot"
     fi
   fi
 
   if has nixos-rebuild ; then
     function nix-clean() {
       nix-store --gc
-      sudo nix-store --gc
-      sudo nix-collect-garbage -d
+      sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +14
+      sudo nix-store --optimize --verbose
       sudo /run/current-system/bin/switch-to-configuration boot
     }
   else
