@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+cd $HOME
+
+export KBD_INPUT_NUM=1
+export MOUSE_INPUT_NUM=0
+
+mlterm-fb --im skk --aafont 
