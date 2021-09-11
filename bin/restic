@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+export RESTIC_REPOSITORY=rclone:Teracloud:NyZen9
+export RESTIC_PASSWORD_FILE=$HOME/.config/rclone/restic
+
+exec /run/current-system/sw/bin/restic $@
