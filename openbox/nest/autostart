@@ -1,5 +1,0 @@
-cat "$(cat /proc/$(pgrep picom)/cmdline | tr "\0" "\t" | cut -f3)" | grep -vP "vsync|backend" >~/.cache/picom.conf
-echo -e 'backend="xrender";\nvsync=false;\n' >>~/.cache/picom.conf
-picom --config ~/.cache/picom.conf &
-
-hsetroot -solid '#333333' &

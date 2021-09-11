@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cd ~/
+
+if type wcwidth-cjk >/dev/null 2>&1 ; then
+  mlterm -e wcwidth-cjk $(which zsh) --login &
+else
+  mlterm -e $(which zsh) --login &
+fi

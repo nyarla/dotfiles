@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Environment
+# ===========
+
+# gtk2 theme
+# ----------
+export GTK2_RC_FILES=/home/nyarla/.gtkrc-2.0
+
+# lang
+# ----
+export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF8
+
+# GUI
+# ===
+
+# wallpaper
+# ---------
+hsetroot -full ~/local/wallpapers/nix-wallpaper-mosaic-blue.png
+
+# dock
+# ----
+pkill lxqt-panel || true
+lxqt-panel >/dev/null 2>&1 &
+
+# Services
+# ========
+
+# ibus
+# ----
+ibus-daemon -drx
+
+# calibre
+# -------
+pkill calibre || true
+calibre --start-in-tray
+
+# syncthing
+# ---------
+if test $(ps aux | grep syncthing | wc -l) -lt 2 ; then
+  syncthing serve --no-browser >/dev/null 2>&1 &
+fi
