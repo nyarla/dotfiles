@@ -10,7 +10,7 @@ function has() {
 
 # Perl
 # ----
-if has perl && test -d "$HOME"/.config/perl ; then
+if has perl && test -d "$HOME"/.local/share/perl ; then
   eval "$(perl -I"$HOME"/.config/perl/lib/perl5 -Mlocal::lib="$HOME"/.config/perl)"
   export PERL_CPANM_OPT="--local-lib-contained ${HOME}/.config/perl"
 fi
@@ -22,7 +22,7 @@ export GOPATH="$HOME"/dev
 
 # Node.js (npm)
 # -------------
-! test -d "$HOME"/.config/npm/bin   || export PATH="$HOME"/.config/npm/bin:$PATH
+! test -d "$HOME"/.local/share/npm/bin || export PATH="$HOME"/.local/share/npm/bin:$PATH
 
 # Rust (cargo)
 # ------------
