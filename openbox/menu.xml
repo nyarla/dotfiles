@@ -63,10 +63,15 @@
         <command>picard</command>
       </action>
     </item>
-    <separator/>
+    <separator />
     <item label="Kindle">
       <action name="Execute">
         <command>/home/nyarla/local/bin/kindle</command>
+      </action>
+      </item>
+      <item label="Amazon Music">
+      <action name="Execute">
+        <command>/home/nyarla/local/bin/AmazonMusic</command>
       </action>
     </item>
   </menu>
@@ -127,6 +132,11 @@
         <command>connman-gtk</command>
       </action>
     </item>
+    <item label="Task Manager">
+      <action name="Execute">
+        <command>qps</command>
+      </action>
+    </item>
   </menu>
 
   <menu id="system-actions" label="Actions">
@@ -168,6 +178,11 @@
     <item label="virt-manager">
       <action name="Execute">
         <command>virt-manager</command>
+      </action>
+    </item>
+    <item label="remmina">
+      <action name="Execute">
+        <command>remmina</command>
       </action>
     </item>
   </menu>

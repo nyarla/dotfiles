@@ -27,17 +27,20 @@ lxqt-panel >/dev/null 2>&1 &
 # Services
 # ========
 
+# on NyZen9
+if test -e /dev/disk/by-uuid/05b4746c-9eed-4228-b306-922a9ef6ac4e ; then
+  if test ! -d /run/media/nyarla/data; then
+    gio mount -d 05b4746c-9eed-4228-b306-922a9ef6ac4e /run/media/nyarla/data &
+  fi
+fi
+
 # ibus
 # ----
 ibus-daemon -drx
 
 # calibre
 # -------
-pkill calibre || true
-calibre --start-in-tray
-
-# syncthing
-# ---------
-if test $(ps aux | grep syncthing | wc -l) -lt 2 ; then
-  syncthing serve --no-browser >/dev/null 2>&1 &
+if type calibre >/dev/null 2>&1 ; then
+  pkill calibre || true
+  calibre --start-in-tray &
 fi
