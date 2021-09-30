@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source ~/.config/gyazo/env
+
+ok() {
+  zenity --info --text "Captured" --icon-name=camera-photo-symbolic
+}
+
+capture() {
+  local filename=~/Pictures/$(date +%Y-%m-%dT%H-%M-%S).png
+
+  local wid=$(xdotool selectwindow)
+  if test ! -z $wid ; then
+    maim -f png -i $wid $filename
+    ok
+  fi
+}
+
+screenshot() {
+  local filename=~/Pictures/$(date +%Y-%m-%dT%H-%M-%S).png
+  maim -f png $filename
+  ok
+}
+
+main() {
+  case "${1:-}" in
+    capture)
+        capture
+      ;;
+    screenshot)
+      screenshot
+      ;;
+  esac
+}
+
+main $@
