@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-export YABRIDGE_DEBUG_FILE=$HOME/.cache/yabridge.log
-export YABRIDGE_DEBUG_LEVEL=1
-
-qjackctl &
-"$(dirname "$0")/bitwig-studio"
-

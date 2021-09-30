@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Edit the.kalaclista.com
-Exec=/home/nyarla/protocol-kalaclista-website.pl %u
-Icon=text-markdown
-Type=Application
-Terminal=false
-MimeType=x-scheme-handler/kalaclista;
