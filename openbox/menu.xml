@@ -8,13 +8,6 @@
       </action>
     </item>
 
-    <item label="Google Chrome">
-      <action name="Execute">
-        <command
-        >perl /home/nyarla/.config/openbox/bin/window-activate google-chrome-stable &#39;^google-chrome&#39;</command>
-      </action>
-    </item>
-    
     <item label="Thunderbird">
       <action name="Execute">
         <command
@@ -22,6 +15,13 @@
       </action>
     </item>
 
+    <item label="Google Chrome">
+      <action name="Execute">
+        <command
+        >perl /home/nyarla/.config/openbox/bin/window-activate google-chrome-stable &#39;^google-chrome&#39;</command>
+      </action>
+    </item>
+    
     <item label="Bitwarden">
       <action name="Execute">
         <command>bitwarden</command>
@@ -64,6 +64,17 @@
       </action>
     </item>
     <separator />
+    <item label="Audacity">
+      <action name="Execute">
+        <command>audacity</command>
+      </action>
+    </item>
+    <item label="DeaDBeeF">
+      <action name="Execute">
+        <command>deadbeef</command>
+      </action>
+    </item>
+    <separator />
     <item label="Kindle">
       <action name="Execute">
         <command>/home/nyarla/local/bin/kindle</command>
@@ -77,6 +88,12 @@
   </menu>
 
   <menu id="application-office" label="Office">
+    <item label="Calcurator">
+      <action name="Execute">
+        <command>mate-calc</command>
+      </action>
+    </item>
+    <separator />
         <item label="Spice up">
       <action name="Execute">
         <command>com.github.philip-scott.spice-up</command>
@@ -104,11 +121,6 @@
       </action>
     </item>
     <separator />
-    <item label="Calcurator">
-      <action name="Execute">
-        <command>mate-calc</command>
-      </action>
-    </item>
     <item label="Charactar Map">
       <action name="Execute">
         <command>gucharmap</command>
@@ -122,9 +134,9 @@
         <command>pavucontrol</command>
       </action>
     </item>
-    <item label="Bluetooth">
+    <item label="Task Manager">
       <action name="Execute">
-        <command>blueman-manager</command>
+        <command>qps</command>
       </action>
     </item>
     <item label="Network">
@@ -132,9 +144,9 @@
         <command>connman-gtk</command>
       </action>
     </item>
-    <item label="Task Manager">
+    <item label="Bluetooth">
       <action name="Execute">
-        <command>qps</command>
+        <command>blueman-manager</command>
       </action>
     </item>
   </menu>
@@ -146,7 +158,7 @@
     <separator />
     <item label="Lock">
       <action name="Execute">
-        <command>dm-tool switch-to-greeter</command>
+        <command>i3lock-fancy</command>
       </action>
     </item>
     <item label="Exit">
@@ -155,11 +167,6 @@
     <item label="Reboot">
       <action name="Execute">
         <command>systemctl reboot</command>
-      </action>
-    </item>
-    <item label="Shutdown">
-      <action name="Execute">
-        <command>systemctl shutdown</command>
       </action>
     </item>
   </menu>
@@ -175,23 +182,23 @@
         <command>bash /home/nyarla/.config/openbox/bin/edit-notes</command>
       </action>
     </item>
+    <item label="mining">
+      <action name="Execute">
+        <command>bash /home/nyarla/.config/openbox/bin/mining</command>
+      </action>
+    </item>
     <item label="virt-manager">
       <action name="Execute">
         <command>virt-manager</command>
       </action>
     </item>
-    <item label="remmina">
-      <action name="Execute">
-        <command>remmina</command>
-      </action>
-    </item>
   </menu>
 
-  <menu
+  <!--menu
     id="dynamic-tasklist"
     label="Tasks"
     execute="perl /home/nyarla/.config/openbox/bin/window-list"
-  />
+  / -->
 
   <menu id="root-menu" label="NyZen9">
     <menu id="application-main" />
@@ -201,8 +208,6 @@
     <menu id="application-multimedia" /> 
     <separator />
     <menu id="application-office" />
-    <separator />
-    <menu id="dynamic-tasklist" /> 
     <separator />
     <menu id="system-utilities" />
     <menu id="system-actions" />

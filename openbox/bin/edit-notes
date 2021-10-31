@@ -2,7 +2,7 @@
 
 cd ~/local/notes
 if type wcwidth-cjk >/dev/null 2>&1 ; then
-  dbus-launch mlterm -e wcwidth-cjk $(which nvim) . &
+  mlterm -e wcwidth-cjk $(which nvim) . &
 else
-  dbus-launch mlterm -e $(which nvim) . &
+  mlterm -e $(which nvim) . &
 fi
