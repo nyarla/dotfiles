@@ -17,11 +17,10 @@ export LC_ALL=ja_JP.UTF8
 
 # wallpaper
 # ---------
-hsetroot -full ~/local/wallpapers/nix-wallpaper-mosaic-blue.png
+hsetroot -full ~/local/wallpapers/nix-wallpaper-mosaic-blue.png &
 
 # dock
 # ----
-pkill lxqt-panel || true
 lxqt-panel >/dev/null 2>&1 &
 
 # Services
@@ -34,13 +33,16 @@ if test -e /dev/disk/by-uuid/05b4746c-9eed-4228-b306-922a9ef6ac4e ; then
   fi
 fi
 
+if test -e /dev/disk/by-uuid/2d5042e0-906c-4fda-8653-9cd105ea34ca ; then
+  if test ! -d /run/media/nyarla/kvm; then
+    gio mount -d 2d5042e0-906c-4fda-8653-9cd105ea34ca /run/media/nyarla/kvm &
+  fi
+fi
+  
 # ibus
 # ----
 ibus-daemon -drx
 
 # calibre
 # -------
-if type calibre >/dev/null 2>&1 ; then
-  pkill calibre || true
-  calibre --start-in-tray &
-fi
+calibre --start-in-tray &
