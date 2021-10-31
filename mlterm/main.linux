@@ -2,7 +2,7 @@
 # ========
 
 use_login_shell = true
-termtype = xterm-256color
+termtype = mlterm-256color
 encoding = UTF-8
 col_size_of_width_a = 2
 
