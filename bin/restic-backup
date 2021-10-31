@@ -4,5 +4,5 @@ export HOME=/home/nyarla
 export RESTIC_FORGET_ARGS="--prune --keep-daily 7 --keep-weekly 2 --keep-monthly 3"
 export RESTIC_BACKUP_ARGS="--exclude-file ${HOME}/.config/rclone/ignore"
 
-$HOME/local/bin/restic backup -H NyZen9 $RESTIC_BACKUP_ARGS $@
+$HOME/local/bin/restic backup -H NixOS $RESTIC_BACKUP_ARGS $@
 $HOME/local/bin/restic forget $RESTIC_FORGET_ARGS
