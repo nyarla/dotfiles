@@ -36,6 +36,12 @@ export GOPATH="$HOME"/dev
 # --------------------------
 ! test -d "$HOME"/local/bin         || export PATH="$HOME"/local/bin:$PATH
 
+# Bup
+# ---
+if test -d /run/media/nyarla/src/local/bup ; then
+  export BUP_DIR=/run/media/nyarla/src/local/bup
+fi
+
 # EDTIOR (vim)
 # ------------
 if has nvim ; then
