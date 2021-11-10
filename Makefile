@@ -15,9 +15,9 @@ git:
 zsh:
 	test -d ~/.config/zsh || mkdir -p ~/.config/zsh
 	test -d ~/.config/zsh/z || (cd ~/.config/zsh; git clone https://github.com/rupa/z)
-	test -e ~/.zprofile || ln -sf $(shell pwd)/zsh/zprofile ~/.zprofile
-	test -e ~/.zshenv || ln -sf $(shell pwd)/zsh/zshenv ~/.zshenv
-	test -e ~/.zshrc || ln -sf $(shell pwd)/zsh/zshrc ~/.zshrc
+	test -e ~/.zprofile || ln -sf $(shell pwd)/zsh/zprofile.zsh ~/.zprofile
+	test -e ~/.zshenv || ln -sf $(shell pwd)/zsh/zshenv.zsh ~/.zshenv
+	test -e ~/.zshrc || ln -sf $(shell pwd)/zsh/zshrc.zsh ~/.zshrc
 
 starship:
 	test -e ~/.config || mkdir -p ~/.config
@@ -60,8 +60,8 @@ terminal: mlterm
 
 mlterm:
 	test -d ~/.mlterm || mkdir -p ~/.mlterm
-	test -e ~/.mlterm/color || ln -sf $(shell pwd)/mlterm/key ~/.mlterm/
-	test -e ~/.mlterm/key || ln -sf $(shell pwd)/mlterm/key ~/.mlterm/
+	test -e ~/.mlterm/color || ln -sf $(shell pwd)/mlterm/color ~/.mlterm/color
+	test -e ~/.mlterm/key || ln -sf $(shell pwd)/mlterm/key ~/.mlterm/key
 	test -e ~/.mlterm/main || (\
 		(test "$(shell uname -s)" = "Linux" && ln -sf $(shell pwd)/mlterm/main.linux ~/.mlterm/main && exit) || true ;\
 		(test "$(shell uname -s)" = "Darwin" && ln -sf $(shell pwd)/mlterm/main.macOS ~/.mlterm/main && exit) || true ;\
