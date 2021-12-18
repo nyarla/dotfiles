@@ -9,6 +9,8 @@ function has() {
   type ${1:-} >/dev/null 2>&1
 }
 
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
 # keychain (for ssh and mosh)
 # ---------------------------
 

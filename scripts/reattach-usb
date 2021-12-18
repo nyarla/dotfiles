@@ -1,0 +1,65 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+sub slurp {
+  my $src = shift;
+  open( my $fh, '<', $src )
+    or die "failed to open path: ${src}";
+
+  my $data = do { local $/; <$fh> };
+  chomp($data);
+  
+  close($fh)
+    or die "failed to close path: ${src}";
+
+  return $data;
+}
+
+sub reattach {
+  my $id = shift;
+
+  if ( $id eq q{} ) {
+    system(q{zenity --info --no-wrap --text "Failed to find USB device"});
+    exit 1;
+  }
+ 
+  my $cmd = qq|echo -n "${id}" >/sys/bus/usb/drivers/usb/unbind ; echo -n "${id}" >/sys/bus/usb/drivers/usb/bind|;
+
+  system("gksudo -- sh -c '${cmd}'");
+}
+
+sub main {
+  my $name = shift;
+
+  my $description = `lsusb | grep -P '${name}'`;
+  chomp($description);
+
+  my ( $bus, $device, $vendor, $product )
+    = ($description =~ m<^Bus (\d+) Device (\d+): ID ([^:]{4}):([^ ]{4})>);
+
+  $bus = int($bus);
+  $device = int($device);
+
+  my $id = q{};
+
+  for my $dir (`ls -d /sys/bus/usb/devices/${bus}-${device}.*`) {
+    chomp($dir);
+
+    if ( -e "$dir/idVendor" && -e "$dir/idProduct") {
+      my $idVendor = slurp("$dir/idVendor");
+      my $idProduct = slurp("$dir/idProduct");
+
+      if ( $vendor eq $idVendor && $product eq $idProduct) {
+        my @p = split q{/}, $dir;
+        $id = pop @p;
+        last;
+      }
+    }
+  }
+
+  reattach($id);
+}
+
+main(@ARGV);

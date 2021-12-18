@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-cd ~/local/wine/AmazonMusic
-env WINEPREFIX=$(pwd) wine 'C:\users\nyarla\AppData\Local\Amazon Music\Amazon Music.exe'
