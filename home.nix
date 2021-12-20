@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    ./config/desktops
     ./config/git
     ./config/mlterm
     ./config/openbox
