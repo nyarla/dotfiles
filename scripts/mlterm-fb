@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+cd $HOME
+
+export KBD_INPUT_NUM=$(readlink /dev/input/by-id/usb-25KEYS_zinc_rev.1-event-kbd | cut -dt -f2)
+export MOUSE_INPUT_NUM=$(readlink /dev/input/by-id/usb-PixArt_USB_Optical_Mouse-event-mouse | cut -dt -f2)
+
+mlterm-fb --im skk --aafont 
