@@ -24,11 +24,8 @@ in writeShellScript "autostart" ''
   run lxqt-panel >/dev/null 2>&1 
 
   if test "$(hostname)" == "nixos"; then
-  ${automount "05b4746c-9eed-4228-b306-922a9ef6ac4e" "/run/media/nyarla/data"}
-  ${automount "470d2a2f-bdea-49a2-8e9b-242e4f3e1381" "/run/media/nyarla/src"}
-  run calibre --start-in-tray
+    ${automount "05b4746c-9eed-4228-b306-922a9ef6ac4e" "/run/media/nyarla/data"}
+    ${automount "470d2a2f-bdea-49a2-8e9b-242e4f3e1381" "/run/media/nyarla/src"}
+    run calibre --start-in-tray
   fi
-
-  run ibus-daemon
-  run nm-applet
 ''
