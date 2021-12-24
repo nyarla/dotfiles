@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+export WINEPREFIX=/run/media/nyarla/src/local/daw/daw/deCoda
+export LD_PRELOAD=
+
+cd $WINEPREFIX
+
+# wineasio.dll
+wine64 regsvr32 wineasio.dll
+
+# qjackctl
+qjackctl &
+
+# FL Studio
+exec wine explorer 'C:\Program Files\zplane\deCoda\deCoda.exe'
