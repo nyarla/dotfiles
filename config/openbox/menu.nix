@@ -90,7 +90,12 @@ in ''
     (makeExecute "eLicenser" (wineCmd "eLicenser"))
     "${sep}"
     (makeExecute "Bitwig Studio" "bitwig-studio")
+    (makeExecute "Zrythm" "zrythm")
+    (makeExecute "Helio.fm" "helio")
+    (makeExecute "MuseScore" "musescore")
+    "${sep}"
     (makeExecute "FL Studio" (wineCmd "FLStudio"))
+    (makeExecute "deCoda" (wineCmd "deCoda"))
     "${sep}"
     (makeExecute "Carla" "carla")
   ]}
