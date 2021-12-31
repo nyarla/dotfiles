@@ -65,6 +65,7 @@ in ''
     (makeExecute "Calibre" "calibre")
     (makeExecute "QuodLibet" "quodlibet")
     (makeExecute "Picard" "picard")
+    (makeExecute "Mp3tag" (wineCmd "Mp3tag"))
     "${sep}"
     (makeExecute "Audacity" "audacity")
     (makeExecute "DeaDBeeF" "deadbeef")
