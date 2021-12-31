@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-cd ~/local/notes
+cmd='cd ~/local/notes; echo -en "\e[3 q"; $(which nvim) .; exit'
+
 if type wcwidth-cjk >/dev/null 2>&1 ; then
-  mlterm -e wcwidth-cjk $(which nvim) . &
+  wcwidth-cjk -- mlterm -e zsh -c "$cmd" . &
 else
-  mlterm -e $(which nvim) . &
+  mlterm -e zsh -c "$cmd" . &
 fi
