@@ -5,6 +5,9 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    dotnix.url = "git+file:///etc/nixos/external/dotnix";
+    dotnix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs: {
     homeConfigurations = {
@@ -12,7 +15,10 @@
         system = "x86_64-linux";
         homeDirectory = "/home/nyarla";
         username = "nyarla";
-        configuration.imports = [ ./home.nix ];
+        configuration = {
+          imports = [ ./home.nix ];
+          nixpkgs.overlays = [ inputs.dotnix.overlay ];
+        };
       };
     };
   };
