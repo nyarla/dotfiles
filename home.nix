@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./config/desktops
+    ./config/dunst
     ./config/git
     ./config/keychain
     ./config/mlterm
