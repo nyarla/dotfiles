@@ -17,6 +17,7 @@
         fscache = true;
         autoCRLF = false;
         quotepath = false;
+        hooksPath = "/home/nyarla/local/githooks/hooks";
       };
     };
     ignores = import ./gitignore.nix;
