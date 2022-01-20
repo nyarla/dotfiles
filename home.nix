@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    ./config/backup
     ./config/desktops
     ./config/dunst
     ./config/git
@@ -12,5 +13,12 @@
     ./config/zsh
   ];
   nixpkgs.overlays = [ (import ./.) ];
-  home.packages = with pkgs; [ bup-up wine-run gyazo screenshot ];
+  home.packages = with pkgs; [
+    bup-up
+    gyazo
+    restic
+    restic-run
+    screenshot
+    wine-run
+  ];
 }
