@@ -43,6 +43,9 @@
       };
     }];
     initExtraFirst = ''
+      # enable home-manager
+      source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+
       # change cursor to underline
       echo -en '\033[3 q'
 

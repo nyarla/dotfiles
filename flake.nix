@@ -11,13 +11,15 @@
   };
   outputs = inputs: {
     homeConfigurations = {
-      nyarla = inputs.home-manager.lib.homeManagerConfiguration {
+      nyarla = inputs.home-manager.lib.homeManagerConfiguration rec {
         system = "x86_64-linux";
         homeDirectory = "/home/nyarla";
         username = "nyarla";
         configuration = {
           imports = [ ./home.nix ];
           nixpkgs.overlays = [ inputs.dotnix.overlay ];
+          systemd.user.startServices = true;
+          home.packages = [ inputs.home-manager.defaultPackage.${system} ];
         };
       };
     };
