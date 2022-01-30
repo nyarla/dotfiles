@@ -5,6 +5,7 @@
     shellAliases = {
       "cd" = "__cd";
       "ls" = "ls --color -F";
+      "l" = "ls --color -F -la";
       "nvim-resume" = "pkill -SIGCONT nvim";
       "rm" = "trash";
       "nixos-upgrade" =
