@@ -6,6 +6,10 @@ export LD_PRELOAD=
 cd $WINEPREFIX
 
 # wineasio.dll
+chmod +w $WINEPREFIX/drive_c/windows/system32/wineasio.dll
+cp /run/current-system/sw/lib/wine/x86_64-unix/wineasio.dll.so \
+  $WINEPREFIX/drive_c/windows/system32/wineasio.dll
+
 wine64 regsvr32 wineasio.dll
 
 # qjackctl

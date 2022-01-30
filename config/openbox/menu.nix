@@ -86,19 +86,28 @@ in ''
     (makeExecute "GIF capture" "peek")
   ]}
 
-  ${makeMenu "applications-daw" "DAW" [
-    (makeExecute "QjackCtl" "qjackctl")
-    (makeExecute "eLicenser" (wineCmd "eLicenser"))
-    "${sep}"
-    (makeExecute "Bitwig Studio" "bitwig-studio")
-    (makeExecute "Zrythm" "zrythm")
-    (makeExecute "Helio.fm" "helio")
-    (makeExecute "MuseScore" "musescore")
-    "${sep}"
-    (makeExecute "FL Studio" (wineCmd "FLStudio"))
-    (makeExecute "deCoda" (wineCmd "deCoda"))
-    "${sep}"
-    (makeExecute "Carla" "carla")
+  ${makeMenu "applications-daw" "Music" [
+    (makeMenu "submenu-jack" "JackAudio" [
+      (makeExecute "QjackCtl" "qjackctl")
+      (makeExecute "Carla" "carla")
+    ])
+
+    (makeMenu "submenu-daw" "DAW" [
+      (makeExecute "Bitwig Studio" "bitwig-studio")
+      (makeExecute "Zrythm" "zrythm")
+      (makeExecute "Helio.fm" "helio")
+      (makeExecute "MuseScore" "musescore")
+      "${sep}"
+      (makeExecute "FL Studio" (wineCmd "FLStudio"))
+      (makeExecute "deCoda" (wineCmd "deCoda"))
+    ])
+
+    (makeMenu "submenu-authorizer" "Authorizer" [
+      (makeExecute "Arturia" (wineCmd "Arturia"))
+      (makeExecute "eLicenser" (wineCmd "eLicenser"))
+      (makeExecute "Native Access" (wineCmd "NativeAccess"))
+      (makeExecute "IK Multimedia" (wineCmd "IKMultimedia"))
+    ])
   ]}
 
   ${makeMenu "system-utils" "Utilities" [
