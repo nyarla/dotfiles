@@ -21,7 +21,7 @@ let
       unset args[1]
       args=("''${args[@]}")
       
-      ${restic}/bin/restic ''${1:-} -o rclone.program="${rclone}/bin/rclone" ''${args[@]}
+      ${restic}/bin/restic ''${1:-} -o=rclone.program="${rclone}/bin/rclone" ''${args[@]}
     }
   '';
 
