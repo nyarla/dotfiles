@@ -4,6 +4,7 @@
     ./config/backup
     ./config/browser
     ./config/desktops
+    ./config/development
     ./config/dunst
     ./config/git
     ./config/keychain
