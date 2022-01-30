@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./config/backup
+    ./config/browser
     ./config/desktops
     ./config/dunst
     ./config/git
@@ -13,6 +14,7 @@
     ./config/zsh
   ];
   nixpkgs.overlays = [ (import ./.) ];
+  nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     bup-up
     gyazo
