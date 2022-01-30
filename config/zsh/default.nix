@@ -46,6 +46,11 @@
       # enable home-manager
       source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 
+      # import nix-ld
+      if test -e /etc/profile.d/nix-ld ; then
+        source /etc/profile.d/nix-ld
+      fi
+
       # change cursor to underline
       echo -en '\033[3 q'
 

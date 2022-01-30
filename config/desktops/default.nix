@@ -13,7 +13,9 @@ let
       . /etc/profile.d/$rc
     done
 
-    . $HOME/.config/gsettings/enable.sh
+    for rc in $(ls $HOME/.config/profile.d); do
+      . $HOME/.config/profile.d/$rc
+    done
 
     export LANG=ja_JP.UTF-8
     export LC_ALL=ja_JP.UTF-8

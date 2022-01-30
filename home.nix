@@ -15,6 +15,7 @@
     ./config/starship
     ./config/syncthing
     ./config/zsh
+    ./config/nix-ld
   ];
   nixpkgs.overlays = [ (import ./.) ];
   nixpkgs.config.allowUnfree = true;

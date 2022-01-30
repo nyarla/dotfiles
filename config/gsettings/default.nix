@@ -42,7 +42,7 @@ let
   '';
 
 in {
-  xdg.configFile."gsettings/enable.sh" = {
+  xdg.configFile."profile.d/gsettings.sh" = {
     text = ''
       export NIX_GSETTINGS_OVERRIDES_DIR=${nixos-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas''${NIX_GSETTINGS_OVERRIDES_DIR:+:}$NIX_GSETTINGS_OVERRIDES_DIR
 
