@@ -7,6 +7,7 @@
     ./config/development
     ./config/dunst
     ./config/git
+    ./config/gsettings
     ./config/keychain
     ./config/mlterm
     ./config/openbox

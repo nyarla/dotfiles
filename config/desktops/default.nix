@@ -13,6 +13,8 @@ let
       . /etc/profile.d/$rc
     done
 
+    . $HOME/.config/gsettings/enable.sh
+
     export LANG=ja_JP.UTF-8
     export LC_ALL=ja_JP.UTF-8
     export XDG_SESSION_TYPE=x11
