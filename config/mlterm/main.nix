@@ -4,7 +4,7 @@ let
     "x86_64-linux" = {
       use_xim = false;
       input_method = "ibus";
-      type_engine = "cairo";
+      type_engine = "xft";
     };
   };
 in {
