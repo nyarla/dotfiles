@@ -7,5 +7,6 @@ in {
   screenshot = require ./pkgs/screenshot { };
   skk-dicts-xl = require ./pkgs/skk-dicts-xl { };
   terminfo-mlterm-256color = require ./pkgs/terminfo-mlterm-256color { };
+  wcwidth-cjk = require ./pkgs/wcwidth-cjk { };
   wine-run = require ./pkgs/wine-run { };
 }

@@ -114,4 +114,22 @@
     '';
   };
 
+  home.packages = with pkgs; [
+    fzy
+    wcwidth-cjk
+
+    file
+    gawk
+    gnumake
+    gnused
+
+    inotify-tools
+    trash-cli
+
+    keychain
+    mosh
+
+    bc
+    tree
+  ];
 }
