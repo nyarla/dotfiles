@@ -1,22 +1,24 @@
 { pkgs, ... }: {
   systemd.user.services.backup = {
-    enable = true;
-    description = "Automatic backup by restic and rclone";
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.restic-run ];
-    unitConfig = {
-      RefuseManualStart = "no";
-      RefuseManualStop = "yes";
-    };
-    serviceConfig = {
+    Unit = { Description = "Automatic backup by restic and rclone"; };
+    Install = { RequiredBy = [ "default.target" ]; };
+    Service = {
       Type = "oneshot";
-      RemainAfterExit = "yes";
-      ExecStart = pkgs.writeShellScript "backup-dotfiles.sh" ''
+      ExecStart = "${pkgs.writeShellScript "backup.sh" ''
+        export PATH=${pkgs.restic-run}/bin:$PATH
+
+        if test -e ~/.cache/backup.lock ; then
+          echo "backup process is running or dead lokced"
+          exit 0
+        fi
+
+        touch ~/.cache/backup.lock
+
         # ~/Documents
         cd ~/Documents && restic-backup documents .
 
         # ~/Music
-        cd ~/Music && rstic-backup musics .
+        # cd ~/Music && restic-backup musics .
 
         # ~/local
         cd ~/local && restic-backup dotfiles .
@@ -26,22 +28,30 @@
           (cd /run/media/nyarla/data/Downloads && restic-backup stuck .)
 
           # /run/media/nyarla/data/local
-          (cd /run/media/nyarla/data/local && restic-run source .)
+          (cd /run/media/nyarla/data/local && restic-backup source .)
 
           # /run/media/nyarla/src/local
-          (cd /run/media/nyarla/src/local && restic-run daw .)
+          (cd /run/media/nyarla/src/local && restic-backup daw .)
+          
+          # /run/media/nyarla/src/Music
+          (cd /run/media/nyarla/src/Music && restic-backup musics .)
         fi
-      '';
+
+        rm ~/.cache/backup.lock
+      ''}";
     };
   };
 
-  systemd.user.timer.backup = {
-    enable = false;
-    description = "system timer for automatic backup";
-    wantedBy = [ "timer.target" "multi-user.target" ];
-    timerConfig = {
+  systemd.user.timers.backup = {
+    Unit = { Description = "Timer for automatic backup by restic and rclone"; };
+
+    Timer = {
       OnCalendar = "*-*-* 02:00:00";
-      Persistent = "yes";
+      RandomizedDelaySec = "5m";
+      Persistent = true;
+      Unit = "backup.service";
     };
+
+    Install = { WantedBy = [ "timers.target" ]; };
   };
 }
