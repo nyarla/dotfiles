@@ -9,13 +9,14 @@
     ./config/git
     ./config/gsettings
     ./config/keychain
+    #./config/labwc
     ./config/mlterm
+    ./config/nix-ld
     ./config/openbox
     ./config/skk
     ./config/starship
     ./config/syncthing
     ./config/zsh
-    ./config/nix-ld
   ];
   nixpkgs.overlays = [ (import ./.) ];
   nixpkgs.config.allowUnfree = true;
