@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+for rc in $(ls /etc/profile.d); do
+  . /etc/profile.d/$rc
+done
+
+for rc in $(ls $HOME/.config/profile.d); do
+  . $HOME/.config/profile.d/$rc
+done
+
+# lang
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export XDG_SESSION_TYPE=wayland
+
+# applications
+export GDK_BACKEND=wayland
+export QT_QPA_PLATFORM=wayland
+export CLUTTER_BACKEND=wayland
+export SDL_VIDEODRIVER=wayland
+
+export MOZ_ENABLE_WAYLAND=1
+
+# nvidia GBM
+export GBM_BACKEND=nvidia-drm
+export GBM_BACKEND_PATH=/etc/gbm
+export VK_ICD_FILENAMES=/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json:/run/opengl-driver-32/share/vulkan/icd.d/nvidia_icd.json
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+
+# wlroots
+export LIBSEAT_BACKEND=logind
+export WLR_NO_HARDWARE_CURSORS=1
+export WLR_RENDERER=gles2
+export WLR_RENDERER_ALLOW_SOFTWARE=1
+
+# launch
+systemctl --user import-environment DBUS_SESSION_BUS_ADDRESS XDG_SESSION_ID
+systemctl --user start graphical-session.target
+
+dbus-update-activation-environment --systemd --all
+
+exec /run/wrappers/bin/labwc -V
