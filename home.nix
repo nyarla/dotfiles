@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    ./config/app-container
     ./config/archivers
     ./config/backup
     ./config/browser
