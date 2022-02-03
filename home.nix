@@ -4,6 +4,7 @@
     ./config/archivers
     ./config/backup
     ./config/browser
+    ./config/cryptocurrency
     ./config/desktops
     ./config/development
     ./config/dunst
