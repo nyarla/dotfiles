@@ -2,7 +2,7 @@
 let
   sxhkdrc = pkgs.writeText "sxhkdrc" ''
     super + l
-      i3lock-fancy
+      xset dpms force off
 
     super + alt + l
       mlterm
