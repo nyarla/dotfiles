@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 
-cd ~/local/wine/Kindle
-env WINEPREFIX=$(pwd) wine 'C:\Program Files (x86)\Amazon\Kindle\Kindle.exe'
+export WINEPREFIX=$HOME/local/wine/Kindle
+export LD_PRELOAD=
+
+wine 'C:\Program Files (x86)\Amazon\Kindle\Kindle.exe'
