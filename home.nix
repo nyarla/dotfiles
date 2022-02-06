@@ -5,6 +5,7 @@
     ./config/backup
     ./config/browser
     ./config/cryptocurrency
+    ./config/daw
     ./config/desktops
     ./config/development
     ./config/dunst
