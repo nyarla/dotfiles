@@ -12,6 +12,7 @@ in {
   terminfo-mlterm-256color = require ./pkgs/terminfo-mlterm-256color { };
   wcwidth-cjk = require ./pkgs/wcwidth-cjk { };
   wine-run = require ./pkgs/wine-run { };
+  xremap = require ./pkgs/xremap { };
 
   # override packages
   bitwig-studio3 = super.bitwig-studio3.overrideAttrs (old: rec {

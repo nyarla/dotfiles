@@ -1,5 +1,15 @@
 { pkgs, ... }:
 let
+  xremap = pkgs.writeText "config.json" (builtins.toJSON {
+    keymap = [{
+      name = "prefix key";
+      remap = {
+        f15 = "super-a";
+        f16 = "super-t";
+      };
+    }];
+  });
+
   sxhkdrc = pkgs.writeText "sxhkdrc" ''
     super + l
       xset dpms force off
@@ -31,4 +41,16 @@ let
 
     exec openbox-session
   '';
-in { xdg.configFile."sx/sxrc".source = "${sxrc}"; }
+in {
+  xdg.configFile."sx/sxrc".source = "${sxrc}";
+  systemd.user.services.xremap = {
+    Unit = { Desctiption = "xremap service"; };
+    Install = { WantedBy = [ "default.target" ]; };
+    Service = {
+      Type = "simple";
+      ExecStart = toString (pkgs.writeShellScript "xremap.sh" ''
+        ${pkgs.xremap}/bin/xremap ${xremap} --device event0
+      '');
+    };
+  };
+}
