@@ -27,31 +27,9 @@ in {
       [ "com.bitwig.BitwigStudio.desktop" ] old.installPhase);
   });
 
-  ethminer = (super.ethminer.override {
-    stdenv = super.llvmPackages_13.stdenv;
-    cudatoolkit = super.cudatoolkit_11_5;
-  }).overrideAttrs (old: rec {
-    version = "1.9.2";
-    src = super.fetchFromGitHub {
-      owner = "danieleftodi";
-      repo = "ethminer";
-      rev = "59e063c57d44b3de5393b81f92d89b76d86107a3";
-      sha256 = "1ra1jlc8s3r12qzqkbqzf8646cbj219mqdms04wdzaya2af444h6";
-      fetchSubmodules = true;
-    };
-    postPatch = ''
-      sed -i 's|jsoncpp_static|jsoncpp|' libpoolprotocols/CMakeLists.txt
-      sed -i 's|-Wall|-Wall -Ofast -funroll-loops|g' cmake/EthCompilerSettings.cmake
-    '';
-  });
-
-  nsfminer = (require ./pkgs/nsfminer {
-    stdenv = super.llvmPackage_13.stdenv;
-    cudatoolkit = super.cudatoolkit_11_5;
-  }).overrideAttrs (old: rec {
-    postPatch = old.preConfigure + ''
-      sed -i 's/set(CMAKE_CXX_FLAGS "''${CMAKE_CXX_FLAGS} -stdlib=libstdc++ -fcolor-diagnostics -Qunused-arguments")//' cmake/EthCompilerSettings.cmake
-      sed -i 's|-Wall|-Wall -Ofast -funroll-loops|g' cmake/EthCompilerSettings.cmake
-    '';
-  });
+  zrythm = require "${super.fetchurl {
+    url =
+      "https://raw.githubusercontent.com/NixOS/nixpkgs/c27afb62d45d1c12053404c24fdf579935b7ca1e/pkgs/applications/audio/zrythm/default.nix";
+    sha256 = "05mmcmsks3vj46alvlc0mf5ji8l011zgrijwri54a0s9vb9sg3zg";
+  }}" { };
 }
