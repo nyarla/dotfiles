@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 cd ~/local/services/app/mining
-mlterm -e $(which zsh) -c "sudo bin/nsfminer"
+mlterm -e $(which zsh) -c "sudo goreman start"
