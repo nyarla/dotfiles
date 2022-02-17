@@ -17,12 +17,6 @@
       GOPATH = "$HOME/dev";
       BUP_DIR = "/run/media/nyarla/src/local/bup";
       EDITOR = "nvim";
-      PATH = lib.strings.concatStringsSep ":" [
-        "$HOME/.local/share/npm/bin"
-        "$HOME/dev/bin"
-        "$HOME/local/bin"
-        "$PATH"
-      ];
     };
     enableCompletion = true;
     enableSyntaxHighlighting = true;
@@ -46,6 +40,15 @@
     initExtraFirst = ''
       # enable home-manager
       source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+      export PATH=${
+        lib.strings.concatStringsSep ":" [
+          "$HOME/local/textlintrc/node_modules/.bin"
+          "$HOME/.local/share/npm/bin"
+          "$HOME/dev/bin"
+          "$HOME/local/bin"
+          "$PATH"
+        ]
+      }
 
       # import nix-ld
       if test -e /etc/profile.d/nix-ld ; then
