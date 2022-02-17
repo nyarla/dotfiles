@@ -6,6 +6,7 @@
     # container toolchain
     linuxkit
     act
+    actionlint
 
     # compiler
     binutils
@@ -42,6 +43,8 @@
     # nix
     nixfmt
     rnix-lsp
+    deadnix
+    statix
 
     # editor
     neovim
