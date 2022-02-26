@@ -1,6 +1,6 @@
 { stdenv, fetchurl, pkgconfig, cmake, alsaLib, curl, doxygen, freetype, glib
 , graphviz, gtk3, ladspa-sdk, libjack2, libjpeg_turbo, libpng, pcre, python3
-, webkitgtk, zlib, tree, }:
+, webkitgtk, zlib, xorg, libGLU }:
 stdenv.mkDerivation rec {
   pname = "JUCE-framework";
   version = "6.1.5";
@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
     sha256 = "1qdsg172cn4jc2gjdvaqijyzfyyjn7brrw9pn2yihy0ir9k21vxa";
   };
 
-  nativeBuildInputs = [ cmake pkgconfig doxygen python3 tree ];
+  nativeBuildInputs = [ cmake pkgconfig doxygen python3 ];
   buildInputs = [
     alsaLib
     curl.dev
@@ -19,13 +19,22 @@ stdenv.mkDerivation rec {
     graphviz
     gtk3
     ladspa-sdk
+    libGLU
     libjack2
     libjpeg_turbo
     libpng
     pcre
     webkitgtk
     zlib
-  ];
+  ] ++ (with xorg; [
+    libX11
+    libXcomposite
+    libXcursor
+    libXext
+    libXinerama
+    libXrandr
+    libXrender
+  ]);
 
   cmakeFlags = [ "-DJUCE_BUILD_EXTRAS=ON" "-DJUCE_TOOL_INSTALL_DIR=bin" ];
 
