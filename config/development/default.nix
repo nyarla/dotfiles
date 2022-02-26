@@ -17,7 +17,7 @@
 
     # go
     go
-    goimports
+    gotools
 
     # nim
     nim
