@@ -1,4 +1,18 @@
 { pkgs, ... }: {
+  home.packages = with pkgs; [
+    clipman
+    grim
+    kanshi
+    labwc
+    mako
+    swaybg
+    swaylock
+    waybar
+    wev
+    wlr-randr
+    wtype
+  ];
+
   xdg.configFile."labwc/autostart".source = "${(with pkgs;
     (import ./autostart.nix) { inherit fetchurl writeShellScript; })}";
 
@@ -18,6 +32,8 @@
     QT_QPA_PLATFORM=wayland
     SDL_VIDEODRIVER=wayland
     _JAVA_AWT_WM_NONREPARENTING=1
+
+    GTK_CSD=0
   '';
   xdg.configFile."electron-flags.conf".text = ''
     --enable-features=UseOzonePlatform
