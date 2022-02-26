@@ -8,7 +8,8 @@ for dir in $HOME/local/wine $DTM/daw $DTM/plugins; do
 
       cd "${dir}/${prefix}"
       echo $(pwd)
-      wine-run wineboot -u 
+      bup-up
+      wine-run wineboot -u
       cd $cwd
   done
 done
