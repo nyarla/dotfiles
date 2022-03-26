@@ -1,6 +1,6 @@
 self: super:
 let require = path: args: super.callPackage (import path) args;
-in {
+in rec {
   # additional packages
   JUCE = require ./pkgs/JUCE { };
   bup-up = require ./pkgs/bup-up { };
@@ -26,6 +26,9 @@ in {
     installPhase = (builtins.replaceStrings [ "bitwig-studio.desktop" ]
       [ "com.bitwig.BitwigStudio.desktop" ] old.installPhase);
   });
+
+  firefox-bin-unwrapped =
+    super.firefox-bin-unwrapped.override { systemLocale = "ja_JP"; };
 
   zrythm = require "${super.fetchurl {
     url =
