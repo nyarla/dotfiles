@@ -4,6 +4,7 @@
     ./config/archivers
     ./config/backup
     ./config/browser
+    ./config/chat
     ./config/cryptocurrency
     ./config/daw
     ./config/desktops
@@ -21,7 +22,6 @@
     ./config/syncthing
     ./config/zsh
   ];
-  nixpkgs.overlays = [ (import ./.) ];
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     bup-up

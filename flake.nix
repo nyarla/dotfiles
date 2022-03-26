@@ -17,7 +17,7 @@
         username = "nyarla";
         configuration = {
           imports = [ ./home.nix ];
-          nixpkgs.overlays = [ inputs.dotnix.overlay ];
+          nixpkgs.overlays = [ inputs.dotnix.overlay (import ./.) ];
           systemd.user.startServices = true;
           home.packages = [ inputs.home-manager.defaultPackage.${system} ];
         };
