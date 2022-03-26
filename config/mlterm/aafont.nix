@@ -6,7 +6,7 @@
     "U+2700-27BF" = "DejaVu Sans Mono";
     "U+2800-28FF" = "Noto Sans Symbols2";
 
-    "U+E000-F8FF" = "Symbols Nerd Font 14";
+    "U+E000-FD46" = "Symbols Nerd Font 14";
 
     "U+A9" = "Noto Color Emoji 14";
     "U+AE" = "Noto Color Emoji 14";
