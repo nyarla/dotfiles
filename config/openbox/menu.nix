@@ -74,6 +74,12 @@ in ''
     (makeExecute "Amazon Music" (wineCmd "AmazonMusic"))
   ]}
 
+  ${makeMenu "applications-chat" "Chat" [
+    (makeExecute "Droidcam" "droidcam")
+    (makeExecute "Slack" "slack")
+    (makeExecute "Discord" "discord")
+  ]}
+
   ${makeMenu "applications-office" "Office" [
     (makeExecute "Calc" "mate-calc")
     (makeExecute "Char Maps" "gucharmap")
@@ -133,6 +139,7 @@ in ''
     (makeMenuItem "applications-daw")
     "${sep}"
     (makeMenuItem "applications-office")
+    (makeMenuItem "applications-chat")
     "${sep}"
     (makeMenuItem "system-utils")
     (makeMenuItem "system-actions")
