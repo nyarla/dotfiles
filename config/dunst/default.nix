@@ -1,11 +1,13 @@
 { pkgs, ... }: {
   services.dunst = {
     enable = true;
+    package = pkgs.dunst;
     iconTheme = {
       name = "Flatty-Sky";
       package = pkgs.flatery-icon-theme;
       size = "16x16";
     };
+    waylandDisplay = "wayland-0";
     settings = {
       global = {
         width = 240;

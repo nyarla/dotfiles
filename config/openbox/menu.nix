@@ -1,4 +1,4 @@
-{ ... }:
+_:
 let
   makeExecute = label: command: ''
     <item label="${label}">
@@ -118,7 +118,7 @@ in ''
 
   ${makeMenu "system-utils" "Utilities" [
     (makeExecute "Audio" "pavucontrol")
-    (makeExecute "Systme Monitor" "mate-system-monitor")
+    (makeExecute "System Monitor" "mate-system-monitor")
     (makeExecute "Network" "nm-connection-editor")
     (makeExecute "Bluetooth" "blueman-manager")
   ]}

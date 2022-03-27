@@ -22,6 +22,7 @@ in writeShellScript "autostart" ''
 
   run hsetroot -fill ${wallpaper}
   run lxqt-panel >/dev/null 2>&1 
+  run clipit
 
   if test "$(hostname)" == "nixos"; then
     ${automount "05b4746c-9eed-4228-b306-922a9ef6ac4e" "/run/media/nyarla/data"}

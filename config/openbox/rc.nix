@@ -167,8 +167,8 @@ in ''
 
           (keybind "A-F1" [ (action "ShowMenu" [ (prop "menu" "root-menu") ]) ])
 
-          (keybind "A-S-p" [ (exec "gyazo capture") ])
-          (keybind "W-S-p" [ (exec "gyazo screenshot") ])
+          (keybind "W-g" [ (exec "gyazo capture") ])
+          (keybind "W-A-g" [ (exec "gyazo screenshot") ])
 
           (keybind "W-p" [ (exec "screenshot capture") ])
           (keybind "W-A-p" [ (exec "screenshot screenshot") ])
