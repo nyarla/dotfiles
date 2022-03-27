@@ -7,15 +7,16 @@
     ./config/chat
     ./config/cryptocurrency
     ./config/daw
-    ./config/desktops
     ./config/development
     ./config/dunst
+    ./config/file-manager
     ./config/git
     ./config/gsettings
     ./config/keychain
     #./config/labwc
     ./config/mlterm
     ./config/nix-ld
+    ./config/office
     ./config/openbox
     ./config/skk
     ./config/starship
