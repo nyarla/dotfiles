@@ -13,11 +13,7 @@
       "nixos-apply" =
         ''sudo nixos-rebuild switch --flake "/etc/nixos#$(hostname)"'';
     };
-    sessionVariables = {
-      GOPATH = "$HOME/dev";
-      BUP_DIR = "/run/media/nyarla/src/local/bup";
-      EDITOR = "nvim";
-    };
+    sessionVariables = { GOPATH = "$HOME/dev"; };
     enableCompletion = true;
     enableSyntaxHighlighting = true;
     history = {
@@ -49,6 +45,7 @@
           "$PATH"
         ]
       }
+      export EDITOR=nvim
 
       # import nix-ld
       if test -e /etc/profile.d/nix-ld ; then
