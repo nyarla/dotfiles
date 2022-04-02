@@ -15,6 +15,7 @@
     ./config/keychain
     #./config/labwc
     ./config/mlterm
+    ./config/multimedia
     ./config/nix-ld
     ./config/office
     ./config/openbox
