@@ -8,6 +8,10 @@
 
     dotnix.url = "git+file:///etc/nixos/external/dotnix";
     dotnix.inputs.nixpkgs.follows = "nixpkgs";
+
+    wayland.url =
+      "github:nix-community/nixpkgs-wayland/832a0ed28dbb0aa50f2dc2a1a85abfb11ed56c1d";
+    wayland.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs: {
     homeConfigurations = {
@@ -17,7 +21,8 @@
         username = "nyarla";
         configuration = {
           imports = [ ./home.nix ];
-          nixpkgs.overlays = [ inputs.dotnix.overlay (import ./.) ];
+          nixpkgs.overlays =
+            [ inputs.dotnix.overlay inputs.wayland.overlay (import ./.) ];
           systemd.user.startServices = true;
           home.packages = [ inputs.home-manager.defaultPackage.${system} ];
         };

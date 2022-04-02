@@ -30,9 +30,23 @@ in rec {
   firefox-bin-unwrapped =
     super.firefox-bin-unwrapped.override { systemLocale = "ja_JP"; };
 
-  zrythm = require "${super.fetchurl {
-    url =
-      "https://raw.githubusercontent.com/NixOS/nixpkgs/c27afb62d45d1c12053404c24fdf579935b7ca1e/pkgs/applications/audio/zrythm/default.nix";
-    sha256 = "05mmcmsks3vj46alvlc0mf5ji8l011zgrijwri54a0s9vb9sg3zg";
-  }}" { };
+  labwc = (super.labwc.override { inherit (self) wlroots; }).overrideAttrs
+    (old: rec {
+      src = super.fetchFromGitHub {
+        owner = "labwc";
+        repo = "labwc";
+        rev = "401b282772094bf7423df9865949a18f8a9c4a92";
+        sha256 = "sha256-IowLcVrMlrQbtqiK/xdyPCXayA3sQvDroiXbNXIOo3A=";
+      };
+    });
+
+  wlroots = super.wlroots.overrideAttrs (old: rec {
+    buildInputs = old.buildInputs ++ [ super.egl-wayland ];
+    src = super.fetchFromGitHub {
+      owner = "git-bruh";
+      repo = "wlroots-eglstreams";
+      rev = "e9bccfeee7a82db1e89c750a37cb98400e118761";
+      sha256 = "sha256-oZswRC7+eLDu9JmmmV33o36grQ1QjtBl6SZhEvHvVsQ=";
+    };
+  });
 }
