@@ -48,8 +48,8 @@ in ''
   ]}
 
   ${makeMenu "applications-web" "Web" [
-    (makeExecute "Firefox" (activateCmd "firefox" "Firefox"))
-    (makeExecute "Thunderbird" (activateCmd "thunderbird" "Thunderbird"))
+    (makeExecute "Firefox" (activateCmd "firefox" "firefox"))
+    (makeExecute "Thunderbird" (activateCmd "thunderbird" "thunderbird"))
     (makeExecute "Google Chrome"
       (activateCmd "google-chrome-stable" "^google-chrome"))
     (makeExecute "Bitwarden" "bitwarden")
@@ -78,6 +78,7 @@ in ''
     (makeExecute "Droidcam" "droidcam")
     (makeExecute "Slack" "slack")
     (makeExecute "Discord" "discord")
+    (makeExecute "Telegram" "telegram-desktop")
   ]}
 
   ${makeMenu "applications-office" "Office" [
