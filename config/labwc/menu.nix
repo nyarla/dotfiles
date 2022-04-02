@@ -1,4 +1,4 @@
-{ ... }:
+_:
 let
   makeExecute = label: command: ''
     <item label="${label}">
@@ -43,35 +43,34 @@ in ''
   ${makeMenu "applications-main" "Main" [
     (makeExecute "mlterm" (scriptsCmd "mlterm"))
     (makeExecute "notes" (scriptsCmd "notes"))
-    (makeExecute "mining" (scriptsCmd "mining"))
+    #(makeExecute "mining" (scriptsCmd "mining"))
     (makeExecute "virt-manager" "virt-manager")
   ]}
 
   ${makeMenu "applications-web" "Web" [
-    (makeExecute "Firefox" (activateCmd "firefox" "Firefox"))
-    (makeExecute "Thunderbird" (activateCmd "thunderbird" "Thunderbird"))
-    (makeExecute "Google Chrome"
-      (activateCmd "google-chrome-stable" "^google-chrome"))
-    (makeExecute "Bitwarden" "bitwarden")
+    (makeExecute "Firefox" "firefox")
+    (makeExecute "Thunderbird" "thunderbird")
+    (makeExecute "Google Chrome" "google-chrome-stable")
+    (makeExecute "!Bitwarden" "bitwarden")
   ]}
 
   ${makeMenu "applications-file" "Files" [
-    (makeExecute "Caja" "env GDK_BACKEND=x11 caja")
+    (makeExecute "Caja" "env GDK_BACKEND=x11 caja --display=:0.0")
     (makeExecute "Atril" "atril")
     (makeExecute "Pluma" "pluma")
   ]}
 
   ${makeMenu "applications-multimedia" "Multimedia" [
-    (makeExecute "Calibre" "calibre")
+    (makeExecute "!Calibre" "calibre")
     (makeExecute "QuodLibet" "quodlibet")
-    (makeExecute "Picard" "picard")
+    (makeExecute "!Picard" "picard")
     (makeExecute "Mp3tag" (wineCmd "Mp3tag"))
     "${sep}"
     (makeExecute "Audacity" "audacity")
     (makeExecute "DeaDBeeF" "deadbeef")
     "${sep}"
     (makeExecute "Kindle" (wineCmd "Kindle"))
-    (makeExecute "Amazon Music" (wineCmd "AmazonMusic"))
+    (makeExecute "!Amazon Music" (wineCmd "AmazonMusic"))
   ]}
 
   ${makeMenu "applications-office" "Office" [
@@ -83,7 +82,7 @@ in ''
     "${sep}"
     (makeExecute "Spice up" "com.github.philip-scott.spice-up")
     (makeExecute "Simple Scan" "simple-scan")
-    (makeExecute "GIF capture" "peek")
+    (makeExecute "GIF capture" "env GDK_BACKEND=x11 peek")
   ]}
 
   ${makeMenu "applications-daw" "Music" [
@@ -98,8 +97,8 @@ in ''
       (makeExecute "Helio.fm" "helio")
       (makeExecute "MuseScore" "musescore")
       "${sep}"
-      (makeExecute "FL Studio" (wineCmd "FLStudio"))
-      (makeExecute "deCoda" (wineCmd "deCoda"))
+      (makeExecute "!FL Studio" (wineCmd "FLStudio"))
+      (makeExecute "!deCoda" (wineCmd "deCoda"))
     ])
 
     (makeMenu "submenu-authorizer" "Authorizer" [
@@ -112,14 +111,14 @@ in ''
 
   ${makeMenu "system-utils" "Utilities" [
     (makeExecute "Audio" "pavucontrol")
-    (makeExecute "Systme Monitor" "mate-system-monitor")
+    (makeExecute "System Monitor" "mate-system-monitor")
     (makeExecute "Network" "nm-connection-editor")
     (makeExecute "Bluetooth" "blueman-manager")
   ]}
 
   ${makeMenu "system-actions" "System" [
     (makeAction "Reconfigure" "Reconfigure")
-    (makeExecute "Lock" "i3lock-fancy")
+    (makeExecute "Lock" "swaylock")
     (makeAction "Logout" "Exit")
     (makeExecute "Reboot" "systemctl reboot")
   ]}

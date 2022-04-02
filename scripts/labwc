@@ -8,6 +8,12 @@ for rc in $(ls $HOME/.config/profile.d); do
   . $HOME/.config/profile.d/$rc
 done
 
+run() {
+  if type "''${1}" >/dev/null 2>&1 ; then
+    $@ &
+  fi
+}
+
 export XDG_SESSION_TYPE=wayland
 
 export GBM_BACKEND=nvidia-drm
@@ -17,12 +23,15 @@ export __GLX_VENDOR_LIBRARY_NAME=nvidia
 
 export LIBSEAT_BACKEND=logind
 export WLR_NO_HARDWARE_CURSORS=1
-export WLR_RENDERER=pixman
+#export WLR_RENDERER=pixman
 
 # launch
 systemctl --user import-environment DBUS_SESSION_BUS_ADDRESS XDG_SESSION_ID
 systemctl --user start graphical-session.target
 
 dbus-update-activation-environment --systemd --all
+
+export XCURSOR_PATH=/run/current-system/sw/share/icons:$HOME/.icons/default
+export XCURSOR_THEME=capitaine-cursors-white
 
 exec ~/.nix-profile/bin/labwc -V
