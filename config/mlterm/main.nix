@@ -3,7 +3,7 @@ let
   optional = {
     "x86_64-linux" = {
       use_xim = false;
-      input_method = "uim";
+      input_method = "fcitx";
       type_engine = "xft";
     };
   };
