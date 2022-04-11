@@ -167,11 +167,8 @@ in ''
 
           (keybind "A-F1" [ (action "ShowMenu" [ (prop "menu" "root-menu") ]) ])
 
-          (keybind "W-g" [ (exec "gyazo capture") ])
-          (keybind "W-A-g" [ (exec "gyazo screenshot") ])
-
-          (keybind "W-p" [ (exec "screenshot capture") ])
-          (keybind "W-A-p" [ (exec "screenshot screenshot") ])
+          (keybind "0x6B" [ (exec "gyazo capture") ])
+          (keybind "S-0x6B" [ (exec "gyazo screenshot") ])
 
           (keybind "A-Left" [
             (action "UnmaximizeFull" [ ])

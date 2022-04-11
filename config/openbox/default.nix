@@ -17,10 +17,6 @@ let
       . $HOME/.config/profile.d/$rc
     done
 
-    export LANG=ja_JP.UTF-8
-    export LC_ALL=ja_JP.UTF-8
-    export XDG_SESSION_TYPE=x11
-
     systemctl --user import-environment DISPLAY XAUTHORITY DBUS_SESSION_BUS_ADDRESS XDG_SESSION_ID
     systemctl --user start graphical-session.target
 
@@ -41,16 +37,18 @@ in {
 
   xdg.configFile = {
     # openbox
-    "openbox/autostart".source = "${(with pkgs;
-      (import ./autostart.nix) { inherit fetchurl writeShellScript; })}";
+    "openbox/autostart".source = toString (with pkgs;
+      (import ./autostart.nix) { inherit fetchurl writeShellScript; });
 
     "openbox/menu.xml".text = (import ./menu.nix) { };
 
-    "openbox/environment".text = ''
-      GTK2_RC_FILES=$HOME/.gtkrc-2.0
-      LANG=ja_JP.UTF_8
-      LC_ALL=ja_JP.UTF-8
-    '';
+    "openbox/environment".source = toString (pkgs.writeScript "environment" ''
+      export GTK2_RC_FILES=$HOME/.gtkrc-2.0
+      export LANG=ja_JP.UTF_8
+      export LC_ALL=ja_JP.UTF-8
+      export QT_QPA_PLATFORMTHEME=qt5ct
+      export XDG_SESSION_TYPE=x11
+    '');
 
     "openbox/rc.xml".text = (import ./rc.nix) { inherit lib; };
 
