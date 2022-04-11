@@ -20,8 +20,6 @@ in writeShellScript "autostart" ''
     fi
   }
 
-  export XDG_DATA_DIRS=/run/current-system/sw/share:''${XDG_DATA_DIRS}
-
   config="$HOME/.config/gtk-3.0/settings.ini"
   if test -e $config ; then
     schema="org.gnome.desktop.interface"
@@ -31,11 +29,12 @@ in writeShellScript "autostart" ''
     gsettings set $schema font-name "$(grep 'gtk-font-name' "$config" | cut -d= -f2)"
   fi
 
-  export XCURSOR_PATH=/run/current-system/sw/share/icons:$HOME/.icons/default
-  export XCURSOR_THEME=capitaine-cursors-white
+  export XDG_DATA_DIRS=/run/current-system/sw/share:''${XDG_DATA_DIRS}
 
+  run fcitx
   run ydotoold
   run wl-paste -t text --watch clipman store
+  run swayidle -w timeout 600 'swaylock' timeout 300 'wayout --off HDMI-A-1' resume 'wayout --on HDMI-A-1' before-sleep 'swaylock'
 
   run swaybg -i ${wallpaper} -m fit
   run waybar
@@ -43,5 +42,7 @@ in writeShellScript "autostart" ''
   if test "$(hostname)" == "nixos"; then
     ${automount "05b4746c-9eed-4228-b306-922a9ef6ac4e" "/run/media/nyarla/data"}
     ${automount "470d2a2f-bdea-49a2-8e9b-242e4f3e1381" "/run/media/nyarla/src"}
+
+    run calibre --start-in-tray
   fi
 ''

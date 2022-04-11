@@ -26,17 +26,20 @@
     wev
     wlr-randr
     ydotool
+    wmname
+    wayout
   ];
 
-  xdg.configFile."labwc/autostart".source = "${(with pkgs;
-    (import ./autostart.nix) { inherit fetchurl writeShellScript; })}";
+  xdg.configFile."labwc/autostart".source = toString (with pkgs;
+    (import ./autostart.nix) { inherit fetchurl writeShellScript; });
 
   xdg.configFile."labwc/menu.xml".text = (import ./menu.nix) { };
 
   xdg.configFile."labwc/environment".text = ''
-    GTK2_RC_FILES=$HOME/.gtkrc-2.0
+    XDG_SESSION_TYPE=wayland
 
-    XCURSOR_PATH=/run/current-system/sw/share/icons:$HOME/.icons/default
+    GTK2_RC_FILES=$HOME/.gtkrc-2.0
+    XCURSOR_PATH=$HOME/.nix-profile/share/icons:$HOME/.icons/default
     XCURSOR_THEME=capitaine-cursors-white
 
     LANG=ja_JP.UTF_8
@@ -48,20 +51,16 @@
     GTK_CSD=0
     GTK_THEME=Victory
 
-    QT_QPA_PLATFORM=xcb
     CLUTTER_BACKEND=wayland
+
+    QT_QPA_PLATFORMTHEME=qt5ct
+    QT_QPA_PLATFORM=wayland-egl
+    QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
     SDL_VIDEODRIVER=wayland
     _JAVA_AWT_WM_NONREPARENTING=1
-  '';
 
-  xdg.configFile."electron-flags.conf".text = ''
-    --enable-features=UseOzonePlatform
-    --ozone-platform=wayland
-  '';
-
-  xdg.configFile."electron12-flags.conf".text = ''
-    --enable-features=UseOzonePlatform
-    --ozone-platform=wayland
+    MOZ_ENABLE_WAYLAND=1
+    MOZ_WEBRENDER=0
   '';
 }

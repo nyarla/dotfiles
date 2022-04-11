@@ -50,8 +50,8 @@ in ''
   ${makeMenu "applications-web" "Web" [
     (makeExecute "Firefox" "firefox")
     (makeExecute "Thunderbird" "thunderbird")
-    (makeExecute "Google Chrome" "google-chrome-stable")
-    (makeExecute "!Bitwarden" "bitwarden")
+    (makeExecute "!Google Chrome" "google-chrome-stable")
+    (makeExecute "Bitwarden" "bitwarden --no-sandbox")
   ]}
 
   ${makeMenu "applications-file" "Files" [
@@ -71,6 +71,13 @@ in ''
     "${sep}"
     (makeExecute "Kindle" (wineCmd "Kindle"))
     (makeExecute "!Amazon Music" (wineCmd "AmazonMusic"))
+  ]}
+
+  ${makeMenu "applications-chat" "Chat" [
+    (makeExecute "Droidcam" "droidcam")
+    (makeExecute "Slack" "slack --disable-gpu")
+    (makeExecute "Discord" "discord --no-sandbox")
+    (makeExecute "Telegram" "telegram-desktop")
   ]}
 
   ${makeMenu "applications-office" "Office" [
@@ -117,13 +124,17 @@ in ''
   ]}
 
   ${makeMenu "system-actions" "System" [
-    (makeAction "Reconfigure" "Reconfigure")
+    (makeExecute "Reconfigure" "zsh -c 'kill -SIGHUP $(pgrep labwc)'")
     (makeExecute "Lock" "swaylock")
     (makeAction "Logout" "Exit")
     (makeExecute "Reboot" "systemctl reboot")
   ]}
 
-  ${makeMenu "root-menu" "Openbox" [
+  ${makeMenu "client-menu" "Labwc" [
+
+  ]}
+
+  ${makeMenu "root-menu" "Labwc" [
     (makeMenuItem "applications-main")
     (makeMenuItem "applications-file")
     "${sep}"
@@ -132,6 +143,7 @@ in ''
     (makeMenuItem "applications-daw")
     "${sep}"
     (makeMenuItem "applications-office")
+    (makeMenuItem "applications-chat")
     "${sep}"
     (makeMenuItem "system-utils")
     (makeMenuItem "system-actions")

@@ -31,7 +31,4 @@ systemctl --user start graphical-session.target
 
 dbus-update-activation-environment --systemd --all
 
-export XCURSOR_PATH=/run/current-system/sw/share/icons:$HOME/.icons/default
-export XCURSOR_THEME=capitaine-cursors-white
-
 exec ~/.nix-profile/bin/labwc -V
