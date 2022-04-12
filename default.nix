@@ -10,6 +10,7 @@ in rec {
   screenshot = require ./pkgs/screenshot { };
   skk-dicts-xl = require ./pkgs/skk-dicts-xl { };
   terminfo-mlterm-256color = require ./pkgs/terminfo-mlterm-256color { };
+  wayout = require ./pkgs/wayout { };
   wcwidth-cjk = require ./pkgs/wcwidth-cjk { };
   wine-run = require ./pkgs/wine-run { };
   xremap = require ./pkgs/xremap { };
@@ -25,6 +26,19 @@ in rec {
     };
     installPhase = (builtins.replaceStrings [ "bitwig-studio.desktop" ]
       [ "com.bitwig.BitwigStudio.desktop" ] old.installPhase);
+  });
+
+  calibre = (super.calibre.override {
+    python3Packages = super.python3Packages.overrideScope
+      (orig: old: { # remove after #168071 is merged
+        apsw = old.apsw.overrideAttrs (old: {
+          version = "3.38.1-r1";
+          sha256 = "sha256-pbb6wCu1T1mPlgoydB1Y1AKv+kToGkdVUjiom2vTqf4=";
+          checkInputs = [ ];
+        });
+      });
+  }).overrideAttrs (old: rec {
+    buildInputs = [ super.python3Packages.pycrypto ] ++ old.buildInputs;
   });
 
   firefox-bin-unwrapped =
