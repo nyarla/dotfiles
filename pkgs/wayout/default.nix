@@ -6,7 +6,7 @@ rustPlatform.buildRustPackage rec {
 
   src = fetchgit {
     url = "https://git.sr.ht/~shinyzenith/wayout";
-    sha256 = "16qsxc742hwiyhhi4dxd1brkdqhl1jirmcxy67znp4halabgva8s";
+    sha256 = "sha256-L3NUDcZPf4yDe8KGN4dmJWT6go1nLBGeEJnyNj3kumQ=";
   };
 
   buildInputs = [ wayland wayland-scanner wayland-protocols ];
