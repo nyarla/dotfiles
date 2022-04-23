@@ -1,13 +1,12 @@
-{ stdenv, fetchurl, pkgconfig, cmake, alsaLib, curl, doxygen, freetype, glib
+{ stdenv, fetchzip, pkgconfig, cmake, alsaLib, curl, doxygen, freetype, glib
 , graphviz, gtk3, ladspa-sdk, libjack2, libjpeg_turbo, libpng, pcre, python3
 , webkitgtk, zlib, xorg, libGLU }:
 stdenv.mkDerivation rec {
   pname = "JUCE-framework";
-  version = "6.1.5";
-  src = fetchurl {
-    url =
-      "https://github.com/juce-framework/JUCE/archive/refs/tags/6.1.5.tar.gz";
-    sha256 = "1qdsg172cn4jc2gjdvaqijyzfyyjn7brrw9pn2yihy0ir9k21vxa";
+  version = "6.1.6";
+  src = fetchzip {
+    url = "https://github.com/juce-framework/JUCE/archive/refs/tags/6.1.6.zip";
+    sha256 = "1pxm5ly4480xh7z1xljmsd27qyyfkjflf66g6gi6rcvdh976vzww";
   };
 
   nativeBuildInputs = [ cmake pkgconfig doxygen python3 ];
