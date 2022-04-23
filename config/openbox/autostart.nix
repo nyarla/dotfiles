@@ -21,6 +21,7 @@ in writeShellScript "autostart" ''
   }
 
   run hsetroot -fill ${wallpaper}
+  run xsettingsd
   run lxqt-panel >/dev/null 2>&1 
   run clipit
   run fcitx

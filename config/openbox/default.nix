@@ -32,8 +32,16 @@ in {
   imports = [ ../xorg ];
 
   home.packages = with pkgs;
-    [ jq lxqt.lxqt-config lxqt.lxqt-panel obconf openbox perl wmctrl ]
-    ++ lxqt.preRequisitePackages;
+    [
+      jq
+      lxqt.lxqt-config
+      lxqt.lxqt-panel
+      obconf
+      openbox
+      perl
+      wmctrl
+      xsettingsd
+    ] ++ lxqt.preRequisitePackages;
 
   xdg.configFile = {
     # openbox
