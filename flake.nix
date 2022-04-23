@@ -9,8 +9,7 @@
     dotnix.url = "git+file:///etc/nixos/external/dotnix";
     dotnix.inputs.nixpkgs.follows = "nixpkgs";
 
-    wayland.url =
-      "github:nix-community/nixpkgs-wayland/832a0ed28dbb0aa50f2dc2a1a85abfb11ed56c1d";
+    wayland.url = "github:nix-community/nixpkgs-wayland/master";
     wayland.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs: {
