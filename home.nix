@@ -13,7 +13,7 @@
     ./config/git
     ./config/gsettings
     ./config/keychain
-    #./config/labwc
+    ./config/labwc
     ./config/mlterm
     ./config/multimedia
     ./config/nix-ld
@@ -22,6 +22,7 @@
     ./config/skk
     ./config/starship
     ./config/syncthing
+    ./config/theme
     ./config/zsh
   ];
   nixpkgs.config.allowUnfree = true;
