@@ -9,7 +9,6 @@
     ./config/daw
     ./config/development
     ./config/dunst
-    ./config/file-manager
     ./config/git
     ./config/gsettings
     ./config/keychain
