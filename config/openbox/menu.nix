@@ -35,6 +35,9 @@ let
 
   wine = "/home/nyarla/local/dotfiles/wine";
   wineCmd = app: "${wine}/${app}";
+  iLokCmd = prefix: ''
+    bash -c &#34;cd &#39;/run/media/nyarla/src/local/daw/plugins/${prefix}&#39; &amp;&amp; wine-run wine explorer &#39;C:\Program Files (x86)\iLok License Manager\iLok License Manager.exe&#39;&#34;
+  '';
 
 in ''
   <?xml version="1.0" encoding="UTF-8"?>
@@ -56,7 +59,7 @@ in ''
   ]}
 
   ${makeMenu "applications-file" "Files" [
-    (makeExecute "Caja" "caja")
+    (makeExecute "Thunar" "thunar")
     (makeExecute "Atril" "atril")
     (makeExecute "Pluma" "pluma")
   ]}
@@ -67,7 +70,7 @@ in ''
     (makeExecute "Picard" "picard")
     (makeExecute "Mp3tag" (wineCmd "Mp3tag"))
     "${sep}"
-    (makeExecute "Audacity" "audacity")
+    (makeExecute "Audacity" "nice -n -19 audacity")
     (makeExecute "DeaDBeeF" "deadbeef")
     "${sep}"
     (makeExecute "Kindle" (wineCmd "Kindle"))
@@ -94,16 +97,13 @@ in ''
   ]}
 
   ${makeMenu "applications-daw" "Music" [
-    (makeMenu "submenu-jack" "JackAudio" [
-      (makeExecute "QjackCtl" "qjackctl")
-      (makeExecute "Carla" "carla")
-    ])
+    (makeExecute "Carla" "pw-jack carla")
 
     (makeMenu "submenu-daw" "DAW" [
-      (makeExecute "Bitwig Studio" "bitwig-studio")
-      (makeExecute "Zrythm" "zrythm")
-      (makeExecute "Helio.fm" "helio")
-      (makeExecute "MuseScore" "musescore")
+      (makeExecute "Bitwig Studio" "pw-jack bitwig-studio")
+      (makeExecute "Zrythm" "pw-jack zrythm")
+      (makeExecute "Helio.fm" "pw-jack helio")
+      (makeExecute "MuseScore" "pw-jack musescore")
       "${sep}"
       (makeExecute "FL Studio" (wineCmd "FLStudio"))
       (makeExecute "deCoda" (wineCmd "deCoda"))
@@ -115,12 +115,16 @@ in ''
       (makeExecute "Native Access" (wineCmd "NativeAccess"))
       (makeExecute "IK Multimedia" (wineCmd "IKMultimedia"))
     ])
+
+    (makeMenu "submenu-ilok" "iLok" [
+      (makeExecute "AMT" (iLokCmd "AMT"))
+      (makeExecute "SONiVOX" (iLokCmd "SONiVOX"))
+    ])
   ]}
 
   ${makeMenu "system-utils" "Utilities" [
     (makeExecute "Audio" "pavucontrol")
     (makeExecute "System Monitor" "mate-system-monitor")
-    (makeExecute "Network" "nm-connection-editor")
     (makeExecute "Bluetooth" "blueman-manager")
   ]}
 
