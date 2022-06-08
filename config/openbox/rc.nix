@@ -263,6 +263,8 @@ in ''
                 (action "ShowMenu" [ (prop "menu" "client-menu") ])
               ])
             ])
+          (context "Frame"
+            [ (mousebind "Alt-Left" "Drag" [ (action "Move" [ ]) ]) ])
 
           (context "Top" [
             (mousebind "Left" "Drag"
