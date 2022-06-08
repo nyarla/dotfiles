@@ -20,8 +20,11 @@
         username = "nyarla";
         configuration = {
           imports = [ ./home.nix ];
-          nixpkgs.overlays =
-            [ inputs.dotnix.overlay inputs.wayland.overlay (import ./.) ];
+          nixpkgs.overlays = with inputs; [
+            dotnix.overlay
+            # wayland.overlay
+            (import ./.)
+          ];
           systemd.user.startServices = true;
           home.packages = [ inputs.home-manager.defaultPackage.${system} ];
         };
