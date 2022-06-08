@@ -13,7 +13,10 @@
       "nixos-apply" =
         ''sudo nixos-rebuild switch --flake "/etc/nixos#$(hostname)"'';
     };
-    sessionVariables = { GOPATH = "$HOME/dev"; };
+    sessionVariables = {
+      GOPATH = "$HOME/dev";
+      NIXPKGS_ALLOW_UNFREE = 1;
+    };
     enableCompletion = true;
     enableSyntaxHighlighting = true;
     history = {
@@ -88,7 +91,8 @@
       function nix-clean-all() {
         nix-store --gc
         sudo nix-store --gc
-        sudo nix-collect-garbage -d
+        sudo nix-collect-garbage -
+        sudo nix-store --optimize --verbose
         sudo /run/current-system/bin/switch-to-configuration boot
       }
 
@@ -108,13 +112,15 @@
 
         if test  "x''${dir}" = "x" ; then
           local dir=$(z -l | sed 's/ \+/ /g' | cut -d\   -f2 | fzy | sed "s!~!$HOME!")
-          \cd "''${dir}"
           z --add "''${dir}"
-        else
           \cd "''${dir}"
-          z --add "''${dir}"         
+        else
+          z --add "''${dir}"
+          \cd "''${dir}"
         fi
       }
+
+      compdef __cd=cd
 
       unset -f has
     '';
