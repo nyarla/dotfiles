@@ -3,16 +3,10 @@
     # digital audio workstation
     bitwig-studio3
     musescore
-    picoloop
     zrythm
 
     # jackaudio
-    a2jmidid
     carla
-    jack2Full
-    jack_capture
-    japa
-    qjackctl
 
     # plugins
     ChowKick
@@ -41,7 +35,7 @@
     samplv1
     sorcer
     sunvox
-    surge
+    # surge
     surge-XT
     synthv1
     vcv-rack
