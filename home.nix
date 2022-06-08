@@ -12,7 +12,7 @@
     ./config/git
     ./config/gsettings
     ./config/keychain
-    ./config/labwc
+    # ./config/labwc
     ./config/mlterm
     ./config/multimedia
     ./config/nix-ld
@@ -25,6 +25,7 @@
     ./config/zsh
   ];
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = _: true;
   home.packages = with pkgs; [
     bup-up
     gyazo
