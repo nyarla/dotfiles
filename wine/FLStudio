@@ -12,11 +12,5 @@ cp /run/current-system/sw/lib/wine/x86_64-unix/wineasio.dll.so \
 
 wine64 regsvr32 wineasio.dll
 
-# FLRegKey.Reg
-regedit $WINEPREFIX/FLRegkey.Reg
-
-# qjackctl
-qjackctl &
-
 # FL Studio
 exec wine explorer 'C:\Program Files\Image-Line\FL Studio 20\FL64.exe'
