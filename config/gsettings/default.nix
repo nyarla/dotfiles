@@ -46,6 +46,19 @@ in {
     text = ''
       export NIX_GSETTINGS_OVERRIDES_DIR=${nixos-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas''${NIX_GSETTINGS_OVERRIDES_DIR:+:}$NIX_GSETTINGS_OVERRIDES_DIR
 
+      rm -rf $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas
+      mkdir -p $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas
+
+      for dest in $(echo $NIX_GSETTINGS_OVERRIDES_DIR | tr ':' "\n"); do
+        cp -RLf $dest/*.xml \
+          $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas/
+      done
+
+      ${pkgs.glib.dev}/bin/glib-compile-schemas \
+        $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas/
+
+      export NIX_GSETTINGS_OVERRIDES_DIR=$HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas
+
       ${lib.concatMapStrings (p: ''
         ${add-to-xdg-dirs p}
       '') config.home.packages}
