@@ -2,6 +2,8 @@
   home.packages = with pkgs; [
     # cloud toolchain
     google-cloud-sdk
+    awscli
+    goaccess
 
     # container toolchain
     linuxkit
