@@ -20,12 +20,20 @@ let
     systemctl --user import-environment DISPLAY XAUTHORITY DBUS_SESSION_BUS_ADDRESS XDG_SESSION_ID
     systemctl --user start graphical-session.target
 
-    dbus-update-activation-environment --systemd --all
-
     sxhkd -c ${sxhkdrc} &
+    xrandr --output HDMI-0 --primary
     xsetroot -cursor_name left_ptr
 
-    exec openbox-session
+    openbox-session &
+    waitPID=$!
+
+    dbus-update-activation-environment --systemd --all
+
+    test -n "$waitPID" && wait "$waitPID"
+
+    systemctl --user stop graphical-session.target
+
+    exit 0
   '';
 
 in {
