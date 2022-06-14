@@ -66,7 +66,7 @@ in ''
 
   ${makeMenu "applications-multimedia" "Multimedia" [
     (makeExecute "Calibre" "calibre")
-    (makeExecute "QuodLibet" "quodlibet")
+    (makeExecute "QuodLibet" "nice -n -19 quodlibet")
     (makeExecute "Picard" "picard")
     (makeExecute "Mp3tag" (wineCmd "Mp3tag"))
     "${sep}"
