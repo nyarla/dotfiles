@@ -1,11 +1,11 @@
-{ ... }: {
+_: {
   programs.starship = {
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
     settings = {
       format = ''
-        $directory$git_branch$git_status $cmd_duration
+        $directory$git_branch$git_status$env_var $cmd_duration
         $character'';
 
       add_newline = false;
@@ -38,6 +38,11 @@
       };
 
       git_status = { format = " [$ahead_behind](cyan)"; };
+
+      env_var = {
+        format = "[](bold gray)[](cyan)";
+        variable = "IN_NIX_SHELL";
+      };
     };
   };
 }
