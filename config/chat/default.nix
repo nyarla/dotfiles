@@ -1,3 +1,1 @@
-{ pkgs, config, lib, ... }: {
-  home.packages = with pkgs; [ droidcam discord slack tdesktop ];
-}
+{ pkgs, ... }: { home.packages = with pkgs; [ discord slack tdesktop ]; }
