@@ -4,6 +4,7 @@
     google-cloud-sdk
     awscli
     goaccess
+    gh
 
     # container toolchain
     linuxkit
