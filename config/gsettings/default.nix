@@ -44,15 +44,14 @@ let
 in {
   xdg.configFile."profile.d/gsettings.sh" = {
     text = ''
-      export NIX_GSETTINGS_OVERRIDES_DIR=${nixos-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas''${NIX_GSETTINGS_OVERRIDES_DIR:+:}$NIX_GSETTINGS_OVERRIDES_DIR
-
       rm -rf $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas
       mkdir -p $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas
 
-      for dest in $(echo $NIX_GSETTINGS_OVERRIDES_DIR | tr ':' "\n"); do
-        cp -RLf $dest/*.xml \
-          $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas/
-      done
+      cp -RLf $NIX_GSETTINGS_OVERRIDES_DIR/*.xml \
+        $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas/
+
+      cp -RLf ${nixos-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas/*.xml \
+        $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas/
 
       ${pkgs.glib.dev}/bin/glib-compile-schemas \
         $HOME/.local/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas/
