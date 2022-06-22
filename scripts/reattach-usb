@@ -4,62 +4,88 @@ use strict;
 use warnings;
 
 sub slurp {
-  my $src = shift;
-  open( my $fh, '<', $src )
-    or die "failed to open path: ${src}";
+    my $src = shift;
+    open( my $fh, '<', $src )
+      or err ("Failed to open path: ${src}");
 
-  my $data = do { local $/; <$fh> };
-  chomp($data);
-  
-  close($fh)
-    or die "failed to close path: ${src}";
+    my $data = do { local $/; <$fh> };
+    chomp($data);
 
-  return $data;
+    close($fh)
+      or err ("Failed to close path: ${src}");
+
+    return $data;
+}
+
+sub err($) {
+    my $msg = shift;
+    system( qw(zenity --error --text), $msg );
+    exit 1;
 }
 
 sub reattach {
-  my $id = shift;
+    my $id   = shift;
+    my $name = shift;
 
-  if ( $id eq q{} ) {
-    system(q{zenity --info --no-wrap --text "Failed to find USB device"});
-    exit 1;
-  }
- 
-  my $cmd = qq|echo -n "${id}" >/sys/bus/usb/drivers/usb/unbind ; echo -n "${id}" >/sys/bus/usb/drivers/usb/bind|;
+    my $unbind = qq|echo -n ${id} >/sys/bus/usb/drivers/usb/unbind|;
+    my $bind   = qq|echo -n ${id} >/sys/bus/usb/drivers/usb/bind|;
 
-  system("gksudo -- sh -c '${cmd}'");
+    my $cmd    = join q{; }, ( $unbind, $bind );
+    my $result = system(qq|env SHELL=/bin/sh pkexec sh -c '${cmd}' |);
+    if ( $result != 0 ) {
+          err ("Failed to reattach USB device: ${id}: ${name}");
+    }
+
+    system(qw(zenity --info --text), "Reattach USB successfully: ${name}");
+    
+    exit 0;
 }
 
 sub main {
-  my $name = shift;
+    my $name = shift // q{};
 
-  my $description = `lsusb | grep -P '${name}'`;
-  chomp($description);
+    my @desc = `lsusb | grep -P '${name}'`;
 
-  my ( $bus, $device, $vendor, $product )
-    = ($description =~ m<^Bus (\d+) Device (\d+): ID ([^:]{4}):([^ ]{4})>);
-
-  $bus = int($bus);
-  $device = int($device);
-
-  my $id = q{};
-
-  for my $dir (`ls -d /sys/bus/usb/devices/${bus}-${device}.*`) {
-    chomp($dir);
-
-    if ( -e "$dir/idVendor" && -e "$dir/idProduct") {
-      my $idVendor = slurp("$dir/idVendor");
-      my $idProduct = slurp("$dir/idProduct");
-
-      if ( $vendor eq $idVendor && $product eq $idProduct) {
-        my @p = split q{/}, $dir;
-        $id = pop @p;
-        last;
-      }
+    if ( @desc != 1 ) {
+          err "This script does not support multiple devices.";
     }
-  }
 
-  reattach($id);
+    my $info = shift @desc;
+    chomp($info);
+
+    my ( $vendor, $product ) = ( split qr{:}, ( split qr{ }, $info )[5] );
+
+    my $id = q{};
+
+    for my $dir (`ls /sys/bus/usb/devices/`) {
+        chomp($dir);
+        my $path = "/sys/bus/usb/devices/${dir}";
+
+        if ( !-e "${path}/idProduct" ) {
+            next;
+        }
+
+        if ( !-e "${path}/idVendor" ) {
+            next;
+        }
+
+        if ( slurp("${path}/idProduct") ne $product ) {
+            next;
+        }
+
+        if ( slurp("${path}/idVendor") ne $vendor ) {
+            next;
+        }
+
+        $id = $dir;
+        last;
+    }
+
+    if ( $id eq q{} ) {
+          err "Faild to find USB devices: ${name}";
+    }
+
+    reattach($id, $name);
 }
 
 main(@ARGV);
