@@ -91,7 +91,7 @@
       function nix-clean-all() {
         nix-store --gc
         sudo nix-store --gc
-        sudo nix-collect-garbage -
+        sudo nix-collect-garbage -d
         sudo nix-store --optimize --verbose
         sudo /run/current-system/bin/switch-to-configuration boot
       }
