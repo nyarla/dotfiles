@@ -12,22 +12,24 @@
     wayland.url = "github:nix-community/nixpkgs-wayland/master";
     wayland.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = inputs: {
+  outputs = { nixpkgs, home-manager, ... }@inputs: {
     homeConfigurations = {
-      nyarla = inputs.home-manager.lib.homeManagerConfiguration rec {
-        system = "x86_64-linux";
-        homeDirectory = "/home/nyarla";
+      nyarla = home-manager.lib.homeManagerConfiguration rec {
         username = "nyarla";
-        configuration = {
+        homeDirectory = "/home/${username}";
+
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
+        stateVersion = "22.11";
+
+        configuration = rec {
           imports = [ ./home.nix ];
-          nixpkgs.overlays = with inputs; [
-            dotnix.overlay
-            # wayland.overlay
-            (import ./.)
-          ];
+          nixpkgs.overlays = with inputs; [ dotnix.overlay (import ./.) ];
+
           systemd.user.startServices = true;
-          home.packages = [ inputs.home-manager.defaultPackage.${system} ];
+          home.packages = [ home-manager.defaultPackage.${system} ];
         };
+
       };
     };
   };

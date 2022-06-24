@@ -34,4 +34,7 @@ in {
 
   firefox-bin-unwrapped =
     super.firefox-bin-unwrapped.override { systemLocale = "ja_JP"; };
+
+  quodlibet =
+    super.quodlibet.overrideAttrs (_: rec { doInstallCheck = false; });
 }
